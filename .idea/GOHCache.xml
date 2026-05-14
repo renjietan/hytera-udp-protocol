@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GoORMHelperCache">
+    <option name="schemaMapping">
+      <map>
+        <entry key="Base">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/utils/stuct/base.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UDPClient">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/index.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UdpClient">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/main.go" />
+              <option value="file://$PROJECT_DIR$/udp-client.go" />
+            </set>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="scannedPathMapping">
+      <map>
+        <entry key="file://$PROJECT_DIR$/index.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1778745703769" />
+              <option name="schema">
+                <list>
+                  <option value="UDPClient" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/main.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1778752949819" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/udp-client.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1778753211671" />
+              <option name="schema">
+                <list>
+                  <option value="UdpClient" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/udp-test.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1778749625518" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/utils/gen/login.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1778745703783" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/utils/parse/index.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1778745703786" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/utils/stuct/base.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1778745703793" />
+              <option name="schema">
+                <list>
+                  <option value="Base" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="tableStructMapping">
+      <map>
+        <entry key="base" value="Base" />
+        <entry key="udp_client" value="UdpClient" />
+      </map>
+    </option>
+    <option name="lastTimeChecked" value="1778745722270" />
+  </component>
+</project>
