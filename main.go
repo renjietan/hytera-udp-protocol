@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"net"
 	"os"
@@ -13,7 +14,17 @@ import (
 )
 
 func main() {
-	core.Map2Bt(core.Login)
+	t := core.GetRecursiveField(core.Login, []options.Item{})
+	fmt.Println("长度统计结果：", t)
+	core.SetRecursiveValue(core.Login, t)
+	marshal, err := json.Marshal(core.Login)
+	if err != nil {
+		return
+	}
+	fmt.Println("结果", string(marshal))
+	//for _, item := range core.Login {
+	//	fmt.Println("name:", item.Name, "size", item.Size)
+	//}
 	c, err := NewUdpClient(&options.App{
 		Host:  "127.0.0.1",
 		Port:  "3333",

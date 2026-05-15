@@ -32,6 +32,13 @@
             </set>
           </value>
         </entry>
+        <entry key="Item">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/options/request.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="Options">
           <value>
             <set>
@@ -101,14 +108,14 @@
         <entry key="file://$PROJECT_DIR$/core/login.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1778840579706" />
+              <option name="lastModified" value="1778865166891" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/core/test.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1778840931738" />
+              <option name="lastModified" value="1778851181105" />
             </ScannedPath>
           </value>
         </entry>
@@ -127,7 +134,7 @@
         <entry key="file://$PROJECT_DIR$/main.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1778836577399" />
+              <option name="lastModified" value="1778863690527" />
             </ScannedPath>
           </value>
         </entry>
@@ -158,7 +165,12 @@
         <entry key="file://$PROJECT_DIR$/options/request.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1778840531597" />
+              <option name="lastModified" value="1778853401092" />
+              <option name="schema">
+                <list>
+                  <option value="Item" />
+                </list>
+              </option>
             </ScannedPath>
           </value>
         </entry>
@@ -185,6 +197,13 @@
           <value>
             <ScannedPath>
               <option name="lastModified" value="1778815056798" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/test/test.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1778851271420" />
             </ScannedPath>
           </value>
         </entry>
@@ -285,6 +304,7 @@
         <entry key="address" value="Address" />
         <entry key="app" value="App" />
         <entry key="base" value="Base" />
+        <entry key="item" value="Item" />
         <entry key="options" value="Options" />
         <entry key="reset_options" value="resetOptions" />
         <entry key="timeout_manager" value="TimeoutManager" />
