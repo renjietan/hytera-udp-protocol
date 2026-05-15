@@ -6,28 +6,35 @@ import (
 	"time"
 
 	"github.com/renjietan/hytera-udp-protocol/options"
+	"github.com/renjietan/hytera-udp-protocol/tools"
 )
 
 type UdpClient struct {
-	conn    *net.UDPConn
-	done    chan struct{}
-	options *options.App
-	//mu      sync.RWMutex
+	conn           *net.UDPConn
+	done           chan struct{}
+	options        *options.App
+	timeoutManager *tools.TimeoutManager
 }
 
 func NewUdpClient(addr *options.App) (*UdpClient, error) {
-	_addr := fmt.Sprintf("%s:%s", addr.Host, addr.Port)
-	udpAddr, err := net.ResolveUDPAddr("udp", _addr)
+	//localaddr := fmt.Sprintf("%s:%s", addr.Host, addr.Port)
+	udpAddr, err := tools.ResolveUDPAddr("udp", ":8080")
 	if err != nil {
 		return nil, fmt.Errorf("不是有效的udp地址: %v", err.Error())
 	}
-	conn, conn_err := net.DialUDP("udp", nil, udpAddr)
-	if conn_err != nil {
-		return nil, fmt.Errorf("连接失败: %v", conn_err.Error())
+	conn, connErr := net.ListenUDP("udp", udpAddr)
+	if connErr != nil {
+		return nil, fmt.Errorf("连接失败: %v", connErr.Error())
 	}
+
 	client := &UdpClient{
-		conn:    conn,
-		options: addr,
+		conn:           conn,
+		options:        addr,
+		timeoutManager: tools.NewTimeoutManager(),
+	}
+	err = client.Send("hello")
+	if err != nil {
+		return nil, err
 	}
 	go client.onMsg()
 	return client, nil
@@ -50,12 +57,17 @@ func (c *UdpClient) onMsg() {
 		}
 
 		msg := buf[:n]
-
 		//c.mu.Lock()
 		//c.mu.Unlock()
 		if c.options.OnMsgFunc != nil {
 			c.options.OnMsgFunc(addr, string(msg), nil)
 		}
+		c.timeoutManager.Set("ping", 3*time.Second, func() {
+			err := c.Send("ping")
+			if err != nil {
+				c.options.OnCloseFunc(addr, "心跳发送失败", err)
+			}
+		})
 	}
 }
 
@@ -68,11 +80,17 @@ func (c *UdpClient) onClose() {
 	}
 }
 
-func (c *UdpClient) onError(msg interface{}) {
-	if c.options.OnErrorFunc != nil {
-
+//	func (c *UdpClient) onError(msg interface{}) {
+//		if c.options.OnErrorFunc != nil {
+//
+//		}
+//	}
+func (c *UdpClient) Send(str string) error {
+	remoteAddr := fmt.Sprintf("%s:%s", c.options.RHost, c.options.RPort)
+	remote, _ := net.ResolveUDPAddr("udp", remoteAddr)
+	_, err := c.conn.WriteToUDP([]byte(str), remote)
+	if err != nil {
+		return err
 	}
-}
-func (c *UdpClient) send() {
-	//c.conn.Write()
+	return nil
 }
