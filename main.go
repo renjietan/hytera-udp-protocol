@@ -2,19 +2,32 @@ package main
 
 import (
 	"fmt"
-	"time"
+	"net"
+	"sync"
+
+	"github.com/renjietan/hytera-udp-protocol/options"
 )
 
 func main() {
-	c, err := NewUdpClient("8.135.10.183:55022")
-	if err != nil {
-		c.OnMsg = func(data string, err error) {
-			fmt.Println(data, err)
-		}
-		c.OnClose = func(data string, err error) {
-			fmt.Println(data)
-		}
-	}
+	var sw sync.WaitGroup
+	sw.Add(1)
+	c, err := NewUdpClient(&options.App{
+		Host: "8.135.10.183",
+		Port: "55022",
+		OnMsgFunc: func(addr *net.UDPAddr, data string, err error) {
+			fmt.Println(addr, data, err)
+		},
+		OnErrorFunc: func(addr *net.UDPAddr, data string, err error) {
+			fmt.Println(addr, data, err)
+		},
+		OnCloseFunc: func(addr *net.UDPAddr, data string, err error) {
+			fmt.Println(addr, data, err)
+			sw.Done()
+		},
+	})
+	fmt.Println("c=================", c)
+	fmt.Println("err=================", err)
+	sw.Wait()
 	//quit := make(chan os.Signal, 1)
 	//signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
 	//<-quit
@@ -24,7 +37,4 @@ func main() {
 	//if err := c.; err != nil {
 	//
 	//}
-	fmt.Println("c=================", c)
-	fmt.Println("err=================", err)
-	time.Sleep(100000 * time.Second)
 }

@@ -3,10 +3,39 @@
   <component name="GoORMHelperCache">
     <option name="schemaMapping">
       <map>
+        <entry key="Addr">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/params/Address.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Address">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/params/Address.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="App">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/options/Address.go" />
+              <option value="file://$PROJECT_DIR$/options/App.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="Base">
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/utils/stuct/base.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Options">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/params/Address.go" />
             </set>
           </value>
         </entry>
@@ -44,14 +73,64 @@
         <entry key="file://$PROJECT_DIR$/main.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1778752949819" />
+              <option name="lastModified" value="1778815181580" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/options/Address.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1778813178043" />
+              <option name="schema">
+                <list>
+                  <option value="App" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/options/App.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1778813758377" />
+              <option name="schema">
+                <list>
+                  <option value="App" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/params/Address.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1778813154775" />
+              <option name="schema">
+                <list>
+                  <option value="Options" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/params/addr.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1778810272196" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/test.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1778815056798" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/udp-client.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1778753211671" />
+              <option name="lastModified" value="1778814948659" />
               <option name="schema">
                 <list>
                   <option value="UdpClient" />
@@ -97,7 +176,11 @@
     </option>
     <option name="tableStructMapping">
       <map>
+        <entry key="addr" value="Addr" />
+        <entry key="address" value="Address" />
+        <entry key="app" value="App" />
         <entry key="base" value="Base" />
+        <entry key="options" value="Options" />
         <entry key="udp_client" value="UdpClient" />
       </map>
     </option>

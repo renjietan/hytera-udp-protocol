@@ -4,20 +4,20 @@ import (
 	"fmt"
 	"net"
 	"time"
-)
 
-type Callback func(data string, err error)
+	"github.com/renjietan/hytera-udp-protocol/options"
+)
 
 type UdpClient struct {
 	conn    *net.UDPConn
 	done    chan struct{}
-	OnMsg   Callback
-	OnClose Callback
+	options *options.App
 	//mu      sync.RWMutex
 }
 
-func NewUdpClient(addr string) (*UdpClient, error) {
-	udpAddr, err := net.ResolveUDPAddr("udp", addr)
+func NewUdpClient(addr *options.App) (*UdpClient, error) {
+	_addr := fmt.Sprintf("%s:%s", addr.Host, addr.Port)
+	udpAddr, err := net.ResolveUDPAddr("udp", _addr)
 	if err != nil {
 		return nil, fmt.Errorf("不是有效的udp地址: %v", err.Error())
 	}
@@ -26,7 +26,8 @@ func NewUdpClient(addr string) (*UdpClient, error) {
 		return nil, fmt.Errorf("连接失败: %v", conn_err.Error())
 	}
 	client := &UdpClient{
-		conn: conn,
+		conn:    conn,
+		options: addr,
 	}
 	go client.onMsg()
 	return client, nil
@@ -52,10 +53,9 @@ func (c *UdpClient) onMsg() {
 
 		//c.mu.Lock()
 		//c.mu.Unlock()
-		if c.OnMsg != nil {
-			c.OnMsg(string(msg), nil)
+		if c.options.OnMsgFunc != nil {
+			c.options.OnMsgFunc(addr, string(msg), nil)
 		}
-		fmt.Printf("收到来自 %s 的消息: %+v\n", addr.String(), msg)
 	}
 }
 
@@ -66,4 +66,13 @@ func (c *UdpClient) onClose() {
 		return
 	default:
 	}
+}
+
+func (c *UdpClient) onError(msg interface{}) {
+	if c.options.OnErrorFunc != nil {
+
+	}
+}
+func (c *UdpClient) send() {
+	//c.conn.Write()
 }
