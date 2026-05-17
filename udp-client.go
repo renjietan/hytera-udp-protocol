@@ -18,7 +18,7 @@ type UdpClient struct {
 
 func NewUdpClient(addr *options.App) (*UdpClient, error) {
 	//localaddr := fmt.Sprintf("%s:%s", addr.Host, addr.Port)
-	udpAddr, err := tools.ResolveUDPAddr("udp", ":8080")
+	udpAddr, err := net.ResolveUDPAddr("udp", ":8080")
 	if err != nil {
 		return nil, fmt.Errorf("不是有效的udp地址: %v", err.Error())
 	}

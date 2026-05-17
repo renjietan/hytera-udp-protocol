@@ -1,6 +1,8 @@
 package core
 
 import (
+	"bytes"
+	"encoding/binary"
 	"fmt"
 
 	"github.com/renjietan/hytera-udp-protocol/options"
@@ -127,12 +129,12 @@ func GetRecursiveField(params options.UdpRequest, t []options.Item) []options.It
 	return t
 }
 
-func SetRecursiveValue(params options.UdpRequest, t []options.Item) []options.Item {
+func SetRecursiveValue(params options.UdpRequest, t []options.Item, res *bytes.Buffer) ([]options.Item, *bytes.Buffer) {
 	for index, v := range params {
 		name := v.Name
 		switch value := v.Value.(type) {
 		case options.UdpRequest:
-			t = SetRecursiveValue(value, t)
+			t, res = SetRecursiveValue(value, t, res)
 		default:
 			for i := 0; i < len(t); i++ {
 				if t[i].Name == name {
@@ -144,7 +146,23 @@ func SetRecursiveValue(params options.UdpRequest, t []options.Item) []options.It
 					t = t[1:]
 				}
 			}
+			switch value {
+			case uint64:
+				// 固定数值，按指定字节数写入大端序
+				b := make([]byte, v.Size)
+				switch f.Size {
+				case 1:
+					b[0] = byte(v.Value.(uint64))
+				case 2:
+					binary.BigEndian.PutUint16(b, uint16(v))
+				case 4:
+					binary.BigEndian.PutUint32(b, uint32(v))
+				case 8:
+					binary.BigEndian.PutUint64(b, v)
+				}
+				res = append(res, b...)
+			}
 		}
 	}
-	return t
+	return t, res
 }

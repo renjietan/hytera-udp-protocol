@@ -3,32 +3,10 @@
   <component name="GoORMHelperCache">
     <option name="schemaMapping">
       <map>
-        <entry key="Addr">
-          <value>
-            <set>
-              <option value="file://$PROJECT_DIR$/params/Address.go" />
-            </set>
-          </value>
-        </entry>
-        <entry key="Address">
-          <value>
-            <set>
-              <option value="file://$PROJECT_DIR$/params/Address.go" />
-            </set>
-          </value>
-        </entry>
         <entry key="App">
           <value>
             <set>
-              <option value="file://$PROJECT_DIR$/options/Address.go" />
               <option value="file://$PROJECT_DIR$/options/App.go" />
-            </set>
-          </value>
-        </entry>
-        <entry key="Base">
-          <value>
-            <set>
-              <option value="file://$PROJECT_DIR$/utils/stuct/base.go" />
             </set>
           </value>
         </entry>
@@ -39,41 +17,17 @@
             </set>
           </value>
         </entry>
-        <entry key="Options">
-          <value>
-            <set>
-              <option value="file://$PROJECT_DIR$/params/Address.go" />
-            </set>
-          </value>
-        </entry>
         <entry key="TimeoutManager">
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/tools/timeout.go" />
-              <option value="file://$PROJECT_DIR$/utils/timeout.go" />
-            </set>
-          </value>
-        </entry>
-        <entry key="UDPClient">
-          <value>
-            <set>
-              <option value="file://$PROJECT_DIR$/index.go" />
             </set>
           </value>
         </entry>
         <entry key="UdpClient">
           <value>
             <set>
-              <option value="file://$PROJECT_DIR$/main.go" />
               <option value="file://$PROJECT_DIR$/udp-client.go" />
-            </set>
-          </value>
-        </entry>
-        <entry key="UdpRequest">
-          <value>
-            <set>
-              <option value="file://$PROJECT_DIR$/core/login.go" />
-              <option value="file://$PROJECT_DIR$/types/types.go" />
             </set>
           </value>
         </entry>
@@ -81,7 +35,6 @@
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/tools/timeout.go" />
-              <option value="file://$PROJECT_DIR$/utils/timeout.go" />
             </set>
           </value>
         </entry>
@@ -89,7 +42,6 @@
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/tools/timeout.go" />
-              <option value="file://$PROJECT_DIR$/utils/timeout.go" />
             </set>
           </value>
         </entry>
@@ -97,7 +49,6 @@
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/tools/timeout.go" />
-              <option value="file://$PROJECT_DIR$/utils/timeout.go" />
             </set>
           </value>
         </entry>
@@ -108,45 +59,14 @@
         <entry key="file://$PROJECT_DIR$/core/login.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1778865166891" />
-            </ScannedPath>
-          </value>
-        </entry>
-        <entry key="file://$PROJECT_DIR$/core/test.go">
-          <value>
-            <ScannedPath>
-              <option name="lastModified" value="1778851181105" />
-            </ScannedPath>
-          </value>
-        </entry>
-        <entry key="file://$PROJECT_DIR$/index.go">
-          <value>
-            <ScannedPath>
-              <option name="lastModified" value="1778745703769" />
-              <option name="schema">
-                <list>
-                  <option value="UDPClient" />
-                </list>
-              </option>
+              <option name="lastModified" value="1779008448070" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/main.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1778863690527" />
-            </ScannedPath>
-          </value>
-        </entry>
-        <entry key="file://$PROJECT_DIR$/options/Address.go">
-          <value>
-            <ScannedPath>
-              <option name="lastModified" value="1778813178043" />
-              <option name="schema">
-                <list>
-                  <option value="App" />
-                </list>
-              </option>
+              <option name="lastModified" value="1779010890948" />
             </ScannedPath>
           </value>
         </entry>
@@ -165,7 +85,7 @@
         <entry key="file://$PROJECT_DIR$/options/request.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1778853401092" />
+              <option name="lastModified" value="1779009460550" />
               <option name="schema">
                 <list>
                   <option value="Item" />
@@ -174,43 +94,10 @@
             </ScannedPath>
           </value>
         </entry>
-        <entry key="file://$PROJECT_DIR$/params/Address.go">
-          <value>
-            <ScannedPath>
-              <option name="lastModified" value="1778813154775" />
-              <option name="schema">
-                <list>
-                  <option value="Options" />
-                </list>
-              </option>
-            </ScannedPath>
-          </value>
-        </entry>
-        <entry key="file://$PROJECT_DIR$/params/addr.go">
-          <value>
-            <ScannedPath>
-              <option name="lastModified" value="1778810272196" />
-            </ScannedPath>
-          </value>
-        </entry>
-        <entry key="file://$PROJECT_DIR$/test.go">
-          <value>
-            <ScannedPath>
-              <option name="lastModified" value="1778815056798" />
-            </ScannedPath>
-          </value>
-        </entry>
-        <entry key="file://$PROJECT_DIR$/test/test.go">
-          <value>
-            <ScannedPath>
-              <option name="lastModified" value="1778851271420" />
-            </ScannedPath>
-          </value>
-        </entry>
         <entry key="file://$PROJECT_DIR$/tools/common.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1778835145098" />
+              <option name="lastModified" value="1779011741517" />
             </ScannedPath>
           </value>
         </entry>
@@ -229,68 +116,13 @@
             </ScannedPath>
           </value>
         </entry>
-        <entry key="file://$PROJECT_DIR$/types/types.go">
-          <value>
-            <ScannedPath>
-              <option name="lastModified" value="1778840471709" />
-            </ScannedPath>
-          </value>
-        </entry>
         <entry key="file://$PROJECT_DIR$/udp-client.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1778836945648" />
+              <option name="lastModified" value="1779009310404" />
               <option name="schema">
                 <list>
                   <option value="UdpClient" />
-                </list>
-              </option>
-            </ScannedPath>
-          </value>
-        </entry>
-        <entry key="file://$PROJECT_DIR$/udp-test.go">
-          <value>
-            <ScannedPath>
-              <option name="lastModified" value="1778749625518" />
-            </ScannedPath>
-          </value>
-        </entry>
-        <entry key="file://$PROJECT_DIR$/utils/gen/login.go">
-          <value>
-            <ScannedPath>
-              <option name="lastModified" value="1778745703783" />
-            </ScannedPath>
-          </value>
-        </entry>
-        <entry key="file://$PROJECT_DIR$/utils/parse/index.go">
-          <value>
-            <ScannedPath>
-              <option name="lastModified" value="1778745703786" />
-            </ScannedPath>
-          </value>
-        </entry>
-        <entry key="file://$PROJECT_DIR$/utils/stuct/base.go">
-          <value>
-            <ScannedPath>
-              <option name="lastModified" value="1778745703793" />
-              <option name="schema">
-                <list>
-                  <option value="Base" />
-                </list>
-              </option>
-            </ScannedPath>
-          </value>
-        </entry>
-        <entry key="file://$PROJECT_DIR$/utils/timeout.go">
-          <value>
-            <ScannedPath>
-              <option name="lastModified" value="1778834290303" />
-              <option name="schema">
-                <list>
-                  <option value="timerInfo" />
-                  <option value="timerCommand" />
-                  <option value="resetOptions" />
-                  <option value="TimeoutManager" />
                 </list>
               </option>
             </ScannedPath>
@@ -300,20 +132,15 @@
     </option>
     <option name="tableStructMapping">
       <map>
-        <entry key="addr" value="Addr" />
-        <entry key="address" value="Address" />
         <entry key="app" value="App" />
-        <entry key="base" value="Base" />
         <entry key="item" value="Item" />
-        <entry key="options" value="Options" />
         <entry key="reset_options" value="resetOptions" />
         <entry key="timeout_manager" value="TimeoutManager" />
         <entry key="timer_command" value="timerCommand" />
         <entry key="timer_info" value="timerInfo" />
         <entry key="udp_client" value="UdpClient" />
-        <entry key="udp_request" value="UdpRequest" />
       </map>
     </option>
-    <option name="lastTimeChecked" value="1778745722270" />
+    <option name="lastTimeChecked" value="1779002763684" />
   </component>
 </project>

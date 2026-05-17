@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"net"
@@ -16,7 +17,8 @@ import (
 func main() {
 	t := core.GetRecursiveField(core.Login, []options.Item{})
 	fmt.Println("长度统计结果：", t)
-	core.SetRecursiveValue(core.Login, t)
+	b := bytes.NewBuffer(nil)
+	core.SetRecursiveValue(core.Login, t, b)
 	marshal, err := json.Marshal(core.Login)
 	if err != nil {
 		return
@@ -40,14 +42,6 @@ func main() {
 			fmt.Println(addr, data, err)
 		},
 	})
-	//udpAddr, err := net.ResolveUDPAddr("udp", "8.135.10.183:55022")
-	//if err != nil {
-	//	return
-	//}
-	//err2 := c.Send("hello world")
-	//if err2 != nil {
-	//	return
-	//}
 	time.Sleep(1000 * time.Second)
 	fmt.Println("c=================", c)
 	fmt.Println("err=================", err)
