@@ -3,6 +3,7 @@ package tools
 import (
 	"encoding/binary"
 	"errors"
+	"fmt"
 )
 
 func Uint2Bytes(val uint64, size int, IsBE bool) ([]byte, error) {
@@ -35,4 +36,15 @@ func Uint2Bytes(val uint64, size int, IsBE bool) ([]byte, error) {
 		}
 	}
 	return buf, nil
+}
+
+func printBytes(buf []byte) {
+	fmt.Print("[")
+	for i, b := range buf {
+		if i > 0 {
+			fmt.Print(", ")
+		}
+		fmt.Printf("%#04x", b)
+	}
+	fmt.Println("]")
 }
