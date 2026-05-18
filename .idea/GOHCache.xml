@@ -10,6 +10,27 @@
             </set>
           </value>
         </entry>
+        <entry key="Dispat">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/options/event.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Envelope">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/options/event.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Event">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/options/event.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="Item">
           <value>
             <set>
@@ -28,6 +49,13 @@
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/udp-client.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UdpResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/options/reponse.go" />
             </set>
           </value>
         </entry>
@@ -66,19 +94,45 @@
         <entry key="file://$PROJECT_DIR$/main.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1779010890948" />
+              <option name="lastModified" value="1779120195101" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/options/App.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1778834961125" />
+              <option name="lastModified" value="1779119139380" />
               <option name="schema">
                 <list>
                   <option value="App" />
                 </list>
               </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/options/enums/error.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779119603248" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/options/event.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779114908764" />
+              <option name="schema">
+                <list>
+                  <option value="Envelope" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/options/reponse.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779115850778" />
             </ScannedPath>
           </value>
         </entry>
@@ -97,7 +151,14 @@
         <entry key="file://$PROJECT_DIR$/tools/common.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1779011741517" />
+              <option name="lastModified" value="1779012208060" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/tools/net.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779120923135" />
             </ScannedPath>
           </value>
         </entry>
@@ -119,7 +180,7 @@
         <entry key="file://$PROJECT_DIR$/udp-client.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1779009310404" />
+              <option name="lastModified" value="1779120710974" />
               <option name="schema">
                 <list>
                   <option value="UdpClient" />
@@ -133,12 +194,16 @@
     <option name="tableStructMapping">
       <map>
         <entry key="app" value="App" />
+        <entry key="dispat" value="Dispat" />
+        <entry key="envelope" value="Envelope" />
+        <entry key="event" value="Event" />
         <entry key="item" value="Item" />
         <entry key="reset_options" value="resetOptions" />
         <entry key="timeout_manager" value="TimeoutManager" />
         <entry key="timer_command" value="timerCommand" />
         <entry key="timer_info" value="timerInfo" />
         <entry key="udp_client" value="UdpClient" />
+        <entry key="udp_response" value="UdpResponse" />
       </map>
     </option>
     <option name="lastTimeChecked" value="1779002763684" />

@@ -2,39 +2,30 @@ package main
 
 import (
 	"fmt"
-	"net"
 	"os"
 	"os/signal"
 	"syscall"
+	"time"
 
 	"github.com/renjietan/hytera-udp-protocol/options"
 )
 
 func main() {
-	//loginByte, _ := core.TempLogin("admin", 11, true)
-	//t := tools.GetRecursiveField(loginByte, []options.Item{})
-	//tt, b := tools.Struct2Bytes(loginByte, t, []byte{})
-	//marshal, err := json.Marshal(loginByte)
-	//if err != nil {
-	//	return
-	//}
-	//fmt.Println("结果", string(marshal))
-
-	_, err := NewUdpClient(&options.App{
-		Host:  "127.0.0.1",
-		Port:  "3333",
-		RHost: "8.135.10.183",
-		RPort: "55022",
-		OnMsgFunc: func(addr *net.UDPAddr, data any, err error) {
-			fmt.Println("onMsg：", addr, data, err)
+	client, err := NewUdpClient(&options.App{
+		Host:     "127.0.0.1",
+		Port:     "3333",
+		Duration: time.Second * 3,
+		OnMsgFunc: func(data options.Envelope) {
+			fmt.Println("onMsg：", data)
 		},
-		OnErrorFunc: func(addr *net.UDPAddr, data any, err error) {
-			fmt.Println("onError：", addr, data, err)
+		OnErrorFunc: func(data options.Envelope) {
+			fmt.Println("onMsg：", data)
 		},
-		OnCloseFunc: func(addr *net.UDPAddr, data any, err error) {
-			fmt.Println("onClose：", addr, data, err)
+		OnCloseFunc: func(data options.Envelope) {
+			fmt.Println("onMsg：", data)
 		},
 	})
+	client.Login("8.135.10.183", 57861, "admin", 11, true)
 	if err != nil {
 		return
 	}
