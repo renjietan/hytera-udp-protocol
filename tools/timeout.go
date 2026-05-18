@@ -370,7 +370,6 @@ func (tm *TimeoutManager) Set(name string, duration time.Duration, fn func()) {
 		duration: duration,
 		fn:       fn,
 	}:
-		// 成功发送
 	case <-time.After(100 * time.Millisecond):
 		// 通道满或超时
 	}

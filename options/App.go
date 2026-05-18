@@ -2,7 +2,7 @@ package options
 
 import "net"
 
-type Callback func(addr *net.UDPAddr, data string, err error)
+type Callback func(addr *net.UDPAddr, data any, err error)
 type App struct {
 	Host        string   `yaml:"host"`
 	Port        string   `json:"port"`

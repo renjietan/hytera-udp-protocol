@@ -1,168 +1,82 @@
 package core
 
 import (
-	"bytes"
-	"encoding/binary"
-	"fmt"
-
 	"github.com/renjietan/hytera-udp-protocol/options"
+	"github.com/renjietan/hytera-udp-protocol/tools"
 )
 
-//var Login = options.UdpRequest{
-//	"SrcID":   0xEE,
-//	"DstID":   0xEE,
-//	"Length":  nil,
-//	"CRC":     0x00,
-//	"Version": 0x00,
-//	"UserID":  0x00,
-//	"SAP":     0x01,
-//	"Payload": options.UdpRequest{
-//		"OptCode": 0x01,
-//		"OptData": options.UdpRequest{
-//			"Size":     nil,
-//			"UserName": 5,
-//		},
-//	},
-//}
+var ResultLogin = func(username string, userId int, alive bool) []byte {
+	loginByte, err := TempLogin("admin", 11, true)
+	if err != nil {
+		return nil
+	}
+	return Struct2Bytes(loginByte)
+}
 
-var Login = options.UdpRequest{{
-	Name:  "SrcID",
-	Value: 0xEE,
-	Size:  1,
-}, {
-	Name:  "DstID",
-	Value: 0xEE,
-	Size:  1,
-}, {
-	Name:  "Length",
-	Value: nil,
-	Size:  2,
-}, {
-	Name:  "CRC",
-	Value: 0x00,
-	Size:  2,
-}, {
-	Name:  "Version",
-	Value: 0x00,
-	Size:  1,
-}, {
-	Name:  "UserID",
-	Value: 0x00,
-	Size:  1,
-}, {
-	Name:  "SAP",
-	Value: 0x01,
-	Size:  1,
-}, {
-	Name: "Payload",
-	Value: options.UdpRequest{{
-		Name:  "OptCode",
-		Value: 0x01,
-		Size:  1,
-	}, {
-		Name: "OptData",
-		Value: options.UdpRequest{{
-			Name:  "Size",
-			Value: nil,
-			Size:  1,
-		}, {
-			Name:  "UserName",
-			Value: 0xFF,
-			Size:  10,
-		}, {
-			Name: "Password",
+// TempLogin Mortal 2026/5/18 16:04 初始化 login 所需字节，返回结构体
+// username{string}: 用户名称
+// userId{int}: 用户id
+// alive{bool} 需要保活吗
+// todo: 可能此处 userId 需要保存下来
+var TempLogin = func(username string, userId int, alive bool) (options.UdpRequest, error) {
+	res, err := TempBase(userId)
+	if err != nil {
+		return nil, err
+	}
+	bUsername := []byte(username)
+	optCode := tools.Tern(alive == true, 0x05, 0x01)
+	if optCode == 0x01 {
+		res = append(res, options.Item{
+			Name: "Payload",
 			Value: options.UdpRequest{{
-				Name:  "Password1",
-				Value: 0x00,
-				Size:  4,
+				Name:  "OptCode",
+				Value: optCode,
+				Size:  1,
 			}, {
-				Name:  "Password2",
-				Value: 0x00,
-				Size:  5,
-			}, {
-				Name: "Password3",
+				Name: "OptData",
 				Value: options.UdpRequest{{
-					Name:  "Password3-1",
-					Value: nil,
+					Name:  "Size",
+					Value: len(username),
 					Size:  1,
 				}, {
-					Name:  "Password3-2",
-					Value: 0xFF,
-					Size:  5,
+					Name:  "UserName",
+					Value: bUsername,
+					Size:  len(bUsername),
 				}},
 				Size: 0,
 			}},
 			Size: 0,
-		}},
-		Size: 0,
-	}},
-	Size: 0,
-}}
-
-// GetRecursiveField 返回：针对需要统计长度的字段 进行计数，例如 [{ Name: "Lenght", Value: 10, Size: 2  }]
-func GetRecursiveField(params options.UdpRequest, t []options.Item) []options.Item {
-	for _, v := range params {
-		size := v.Size
-		name := v.Name
-		switch value := v.Value.(type) {
-		case options.UdpRequest:
-			fmt.Println("递归：", name)
-			t = GetRecursiveField(value, t)
-		case int:
-			if len(t) > 0 {
-				lastIndex := len(t) - 1
-				t[lastIndex].Value = t[lastIndex].Value.(int) + size
-				for i := 0; i < lastIndex; i++ {
-					t[i].Value = t[i].Value.(int) + size
-				}
-				fmt.Println("计算", t, name)
-			}
-		case nil:
-			t = append(t, options.Item{
-				Name:  name,
-				Size:  size,
-				Value: 0x00,
-			})
-			fmt.Println("新增", t, name)
-		}
+		})
+	} else {
+		res = append(res, options.Item{
+			Name: "Payload",
+			Value: options.UdpRequest{{
+				Name:  "OptCode",
+				Value: optCode,
+				Size:  1,
+			}, {
+				Name: "OptData",
+				Value: options.UdpRequest{{
+					Name:  "SuperviseInterval",
+					Value: 3000,
+					Size:  4,
+				}, {
+					Name:  "superviseCnt",
+					Value: 3,
+					Size:  2,
+				}, {
+					Name:  "Size",
+					Value: len(username),
+					Size:  1,
+				}, {
+					Name:  "UserName",
+					Value: bUsername,
+					Size:  len(bUsername),
+				}},
+				Size: 0,
+			}},
+			Size: 0,
+		})
 	}
-	return t
-}
-
-func SetRecursiveValue(params options.UdpRequest, t []options.Item, res *bytes.Buffer) ([]options.Item, *bytes.Buffer) {
-	for index, v := range params {
-		name := v.Name
-		switch value := v.Value.(type) {
-		case options.UdpRequest:
-			t, res = SetRecursiveValue(value, t, res)
-		default:
-			for i := 0; i < len(t); i++ {
-				if t[i].Name == name {
-					if i == len(t)-1 {
-						params[index].Value = t[i].Value.(int)
-					} else {
-						params[index].Value = t[i].Value.(int) + t[i].Size
-					}
-					t = t[1:]
-				}
-			}
-			switch value {
-			case uint64:
-				// 固定数值，按指定字节数写入大端序
-				b := make([]byte, v.Size)
-				switch f.Size {
-				case 1:
-					b[0] = byte(v.Value.(uint64))
-				case 2:
-					binary.BigEndian.PutUint16(b, uint16(v))
-				case 4:
-					binary.BigEndian.PutUint32(b, uint32(v))
-				case 8:
-					binary.BigEndian.PutUint64(b, v)
-				}
-				res = append(res, b...)
-			}
-		}
-	}
-	return t, res
+	return res, nil
 }
