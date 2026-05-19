@@ -1,8 +1,9 @@
-package core
+package auth
 
 import (
 	"errors"
 
+	"github.com/renjietan/hytera-udp-protocol/core"
 	"github.com/renjietan/hytera-udp-protocol/tools"
 	"github.com/renjietan/hytera-udp-protocol/types"
 )
@@ -23,7 +24,7 @@ var Login = func(username string, userId int, duration int) ([]byte, error) {
 
 // TempLogin Mortal 2026/5/18 16:04 初始化 login 所需字节，返回结构体
 var TempLogin = func(username string, userId int, duration int) (types.UdpRequest, error) {
-	res, err := TempBase(userId, 0x01)
+	res, err := core.TempBase(userId, 0x01)
 	if err != nil {
 		return nil, err
 	}

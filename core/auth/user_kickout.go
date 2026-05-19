@@ -1,25 +1,26 @@
-package core
+package auth
 
 import (
 	"errors"
 
+	"github.com/renjietan/hytera-udp-protocol/core"
 	"github.com/renjietan/hytera-udp-protocol/tools"
 	"github.com/renjietan/hytera-udp-protocol/types"
 )
 
-// KickOut 用户向电台发送踢出用户通知的订阅
-var KickOut = func(username string, userId int) ([]byte, error) {
-	tempByte, err := TempKickOut(username, userId)
+// UserKickOut 用户向电台发送踢出用户请求，该操作受用户权限影响
+var UserKickOut = func(username string, userId int) ([]byte, error) {
+	tempByte, err := TempUserKickOut(username, userId)
 	if err != nil {
-		return nil, errors.New("Failed to insert into the kickout template: " + err.Error())
+		return nil, errors.New("Failed to insert into the userKickout template: " + err.Error())
 	}
 	recordField := tools.GetRecursiveField(tempByte, []types.Item{})
 	_, res := tools.Struct2Bytes(tempByte, recordField, []byte{})
 	return res, nil
 }
 
-var TempKickOut = func(password string, userId int) (types.UdpRequest, error) {
-	res, err := TempBase(userId, 0x01)
+var TempUserKickOut = func(password string, userId int) (types.UdpRequest, error) {
+	res, err := core.TempBase(userId, 0x01)
 	if err != nil {
 		return nil, err
 	}
@@ -28,7 +29,7 @@ var TempKickOut = func(password string, userId int) (types.UdpRequest, error) {
 		Name: "Payload",
 		Value: types.UdpRequest{{
 			Name:  "OptCode",
-			Value: 0x06,
+			Value: 0x07,
 			Size:  1,
 		}, {
 			Name: "OptData",

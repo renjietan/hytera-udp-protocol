@@ -10,6 +10,20 @@
             </set>
           </value>
         </entry>
+        <entry key="ApplicationInfo">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/core/application/application.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Core">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/core/core.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="Dispat">
           <value>
             <set>
@@ -84,6 +98,93 @@
     </option>
     <option name="scannedPathMapping">
       <map>
+        <entry key="file://$PROJECT_DIR$/core/application.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779198555620" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/application/application.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779207342856" />
+              <option name="schema">
+                <list>
+                  <option value="ApplicationInfo" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/auth/LoginInfo.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779197957065" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/auth/adapterInfo.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779197957085" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/auth/kickout.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779197957089" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/auth/login.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779208003784" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/auth/logout.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779197957053" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/auth/password.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779197957075" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/auth/ping.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779197957081" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/auth/user_kickout.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779197957058" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/core.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779198002430" />
+              <option name="schema">
+                <list>
+                  <option value="Core" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
         <entry key="file://$PROJECT_DIR$/core/login.go">
           <value>
             <ScannedPath>
@@ -94,7 +195,7 @@
         <entry key="file://$PROJECT_DIR$/main.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1779120195101" />
+              <option name="lastModified" value="1779207701765" />
             </ScannedPath>
           </value>
         </entry>
@@ -151,7 +252,7 @@
         <entry key="file://$PROJECT_DIR$/tools/common.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1779012208060" />
+              <option name="lastModified" value="1779207919848" />
             </ScannedPath>
           </value>
         </entry>
@@ -180,7 +281,7 @@
         <entry key="file://$PROJECT_DIR$/udp-client.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1779121066829" />
+              <option name="lastModified" value="1779197957047" />
               <option name="schema">
                 <list>
                   <option value="UdpClient" />
@@ -194,6 +295,8 @@
     <option name="tableStructMapping">
       <map>
         <entry key="app" value="App" />
+        <entry key="application_info" value="ApplicationInfo" />
+        <entry key="core" value="Core" />
         <entry key="dispat" value="Dispat" />
         <entry key="envelope" value="Envelope" />
         <entry key="event" value="Event" />

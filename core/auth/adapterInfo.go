@@ -1,8 +1,9 @@
-package core
+package auth
 
 import (
 	"errors"
 
+	"github.com/renjietan/hytera-udp-protocol/core"
 	"github.com/renjietan/hytera-udp-protocol/tools"
 	"github.com/renjietan/hytera-udp-protocol/types"
 )
@@ -24,7 +25,7 @@ var AdapterInfo = func(AdapterType int, userId int) ([]byte, error) {
 }
 
 var TempAdapterInfo = func(AdapterType int, userId int) (types.UdpRequest, error) {
-	res, err := TempBase(userId, 0x01)
+	res, err := core.TempBase(userId, 0x01)
 	if err != nil {
 		return nil, err
 	}

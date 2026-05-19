@@ -4,7 +4,6 @@ import (
 	"encoding/binary"
 	"errors"
 	"reflect"
-	"unicode"
 
 	"github.com/renjietan/hytera-udp-protocol/types"
 )
@@ -107,14 +106,4 @@ func Uint2Bytes(val uint64, size int, IsLe bool) ([]byte, error) {
 		}
 	}
 	return buf, nil
-}
-
-func ExtractDigits(s string) string {
-	var result []rune
-	for _, r := range s {
-		if unicode.IsDigit(r) {
-			result = append(result, r)
-		}
-	}
-	return string(result)
 }
