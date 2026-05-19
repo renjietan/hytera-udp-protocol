@@ -7,18 +7,21 @@ import (
 	"github.com/renjietan/hytera-udp-protocol/types"
 )
 
-// Logout 用户主动断开与电台的连接时向电台发送登出请求
-var Logout = func(username string, userId int) ([]byte, error) {
-	tempByte, err := TempLogout(username, userId)
+// LoginInfo 对于双通道电台，用户可以获取登录成功后的具体信息
+// 说明:
+// - 包括但不限于: 通道所属设备适配器名称，心跳检测间隔，登录时长，最近一次交互时间等
+// - 用户可以通过设备适配器名称来感知所属通道
+var LoginInfo = func(username string, userId int) ([]byte, error) {
+	tempByte, err := TempLoginInfo(username, userId)
 	if err != nil {
-		return nil, errors.New("Failed to insert into the logout template: " + err.Error())
+		return nil, errors.New("Failed to insert into the login info template: " + err.Error())
 	}
 	recordField := tools.GetRecursiveField(tempByte, []types.Item{})
 	_, res := tools.Struct2Bytes(tempByte, recordField, []byte{})
 	return res, nil
 }
 
-var TempLogout = func(username string, userId int) (types.UdpRequest, error) {
+var TempLoginInfo = func(username string, userId int) (types.UdpRequest, error) {
 	res, err := TempBase(userId, 0x01)
 	if err != nil {
 		return nil, err
@@ -28,7 +31,7 @@ var TempLogout = func(username string, userId int) (types.UdpRequest, error) {
 		Name: "Payload",
 		Value: types.UdpRequest{{
 			Name:  "OptCode",
-			Value: 0x02,
+			Value: 0x09,
 			Size:  1,
 		}, {
 			Name: "OptData",

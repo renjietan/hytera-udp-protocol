@@ -7,6 +7,10 @@ import (
 	"github.com/renjietan/hytera-udp-protocol/types"
 )
 
+// Login 登录;
+// 说明:
+//   - duration传入0, 默认心跳间隔为3s
+//   - duration传入0，默认延时器为3s
 var Login = func(username string, userId int, duration int) ([]byte, error) {
 	tempByte, err := TempLogin(username, userId, duration)
 	if err != nil {
@@ -18,9 +22,6 @@ var Login = func(username string, userId int, duration int) ([]byte, error) {
 }
 
 // TempLogin Mortal 2026/5/18 16:04 初始化 login 所需字节，返回结构体
-// username{string}: 用户名称
-// userId{int}: 用户id
-// alive{bool} 需要保活吗
 var TempLogin = func(username string, userId int, duration int) (types.UdpRequest, error) {
 	res, err := TempBase(userId, 0x01)
 	if err != nil {

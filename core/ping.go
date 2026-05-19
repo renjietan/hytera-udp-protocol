@@ -7,6 +7,7 @@ import (
 	"github.com/renjietan/hytera-udp-protocol/types"
 )
 
+// Ping 心跳
 var Ping = func(userId int) ([]byte, error) {
 	tempByte, err := TempPing(userId)
 	if err != nil {

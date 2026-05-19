@@ -7,18 +7,18 @@ import (
 	"github.com/renjietan/hytera-udp-protocol/types"
 )
 
-// Password 某些业务需要验证密码之后才能够使用，用户用此消息发送密码请求
-var Password = func(password string, userId int) ([]byte, error) {
-	tempByte, err := TempPassword(password, userId)
+// UserKickOut 用户向电台发送踢出用户请求，该操作受用户权限影响
+var UserKickOut = func(username string, userId int) ([]byte, error) {
+	tempByte, err := TempUserKickOut(username, userId)
 	if err != nil {
-		return nil, errors.New("Failed to insert into the password template: " + err.Error())
+		return nil, errors.New("Failed to insert into the userKickout template: " + err.Error())
 	}
 	recordField := tools.GetRecursiveField(tempByte, []types.Item{})
 	_, res := tools.Struct2Bytes(tempByte, recordField, []byte{})
 	return res, nil
 }
 
-var TempPassword = func(password string, userId int) (types.UdpRequest, error) {
+var TempUserKickOut = func(password string, userId int) (types.UdpRequest, error) {
 	res, err := TempBase(userId, 0x01)
 	if err != nil {
 		return nil, err
@@ -28,7 +28,7 @@ var TempPassword = func(password string, userId int) (types.UdpRequest, error) {
 		Name: "Payload",
 		Value: types.UdpRequest{{
 			Name:  "OptCode",
-			Value: 0x04,
+			Value: 0x07,
 			Size:  1,
 		}, {
 			Name: "OptData",

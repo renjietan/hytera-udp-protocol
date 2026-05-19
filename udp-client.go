@@ -32,7 +32,9 @@ func NewUdpClient(config *types.App) (*UdpClient, error) {
 	if connErr != nil {
 		return nil, fmt.Errorf("连接失败: %v", connErr.Error())
 	}
-
+	if config.Duration <= 0 {
+		config.Duration = 3 * time.Second
+	}
 	client := &UdpClient{
 		conn:           conn,
 		options:        config,
