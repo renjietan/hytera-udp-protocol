@@ -7,28 +7,28 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/renjietan/hytera-udp-protocol/options"
+	"github.com/renjietan/hytera-udp-protocol/types"
 )
 
 func main() {
-	client, err := NewUdpClient(&options.App{
+	client, err := NewUdpClient(&types.App{
 		Host:     "127.0.0.1",
 		Port:     "3333",
 		Duration: time.Second * 3,
-		OnMsgFunc: func(data options.Envelope) {
-			fmt.Println("onMsg：", data)
+		OnMsgFunc: func(data types.Envelope) {
+			fmt.Printf("msg event: %s; data: %#v; message: %s; code: %d; address: %v\n", data.Event, data.Data, data.Message, data.Code, data.Address)
 		},
-		OnErrorFunc: func(data options.Envelope) {
-			fmt.Println("onMsg：", data)
+		OnErrorFunc: func(data types.Envelope) {
+			fmt.Printf("error event: %s; data: %#v; message: %s; code: %d; address: %v\n", data.Event, data.Data, data.Message, data.Code, data.Address)
 		},
-		OnCloseFunc: func(data options.Envelope) {
-			fmt.Println("onMsg：", data)
+		OnCloseFunc: func(data types.Envelope) {
+			fmt.Printf("close event: %s; data: %#v; message: %s; code: %d; address: %v\n", data.Event, data.Data, data.Message, data.Code, data.Address)
 		},
 	})
-	client.Login("8.135.10.183", 57861, "admin", 11, true)
 	if err != nil {
 		return
 	}
+	client.Login("8.135.10.183", 55022, "admin", 11, true)
 
 	quit := make(chan os.Signal, 1)
 	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)

@@ -1,40 +1,43 @@
 package core
 
 import (
-	"github.com/renjietan/hytera-udp-protocol/options"
+	"errors"
+
 	"github.com/renjietan/hytera-udp-protocol/tools"
+	"github.com/renjietan/hytera-udp-protocol/types"
 )
 
-var ResultLogin = func(username string, userId int, alive bool) []byte {
-	loginByte, err := TempLogin("admin", 11, true)
+var Login = func(username string, userId int, duration int) ([]byte, error) {
+	tempByte, err := TempLogin(username, userId, duration)
 	if err != nil {
-		return nil
+		return nil, errors.New("Failed to insert into the login template: " + err.Error())
 	}
-	return Struct2Bytes(loginByte)
+	recordField := tools.GetRecursiveField(tempByte, []types.Item{})
+	_, res := tools.Struct2Bytes(tempByte, recordField, []byte{})
+	return res, nil
 }
 
 // TempLogin Mortal 2026/5/18 16:04 初始化 login 所需字节，返回结构体
 // username{string}: 用户名称
 // userId{int}: 用户id
 // alive{bool} 需要保活吗
-// todo: 可能此处 userId 需要保存下来
-var TempLogin = func(username string, userId int, alive bool) (options.UdpRequest, error) {
-	res, err := TempBase(userId)
+var TempLogin = func(username string, userId int, duration int) (types.UdpRequest, error) {
+	res, err := TempBase(userId, 0x01)
 	if err != nil {
 		return nil, err
 	}
-	bUsername := []byte(username)
-	optCode := tools.Tern(alive == true, 0x05, 0x01)
+	bUsername, _ := tools.EncodeString(username, "UTF-16BE")
+	optCode := tools.Tern(duration > 0, 0x05, 0x01)
 	if optCode == 0x01 {
-		res = append(res, options.Item{
+		res = append(res, types.Item{
 			Name: "Payload",
-			Value: options.UdpRequest{{
+			Value: types.UdpRequest{{
 				Name:  "OptCode",
 				Value: optCode,
 				Size:  1,
 			}, {
 				Name: "OptData",
-				Value: options.UdpRequest{{
+				Value: types.UdpRequest{{
 					Name:  "Size",
 					Value: len(username),
 					Size:  1,
@@ -48,15 +51,15 @@ var TempLogin = func(username string, userId int, alive bool) (options.UdpReques
 			Size: 0,
 		})
 	} else {
-		res = append(res, options.Item{
+		res = append(res, types.Item{
 			Name: "Payload",
-			Value: options.UdpRequest{{
+			Value: types.UdpRequest{{
 				Name:  "OptCode",
 				Value: optCode,
 				Size:  1,
 			}, {
 				Name: "OptData",
-				Value: options.UdpRequest{{
+				Value: types.UdpRequest{{
 					Name:  "SuperviseInterval",
 					Value: 3000,
 					Size:  4,
