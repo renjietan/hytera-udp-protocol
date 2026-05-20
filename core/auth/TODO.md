@@ -1,0 +1,2 @@
+- 注意: 以下协议ACK，不是REQ
+  - 0x08 (Kick Out Info Ack)

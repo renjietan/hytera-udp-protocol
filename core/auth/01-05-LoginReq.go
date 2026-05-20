@@ -8,22 +8,22 @@ import (
 	"github.com/renjietan/hytera-udp-protocol/types"
 )
 
-// Login 登录;
+// LoginReq 登录
 // 说明:
 //   - duration传入0, 默认心跳间隔为3s
 //   - duration传入0，默认延时器为3s
-var Login = func(username string, userId int, duration int) ([]byte, error) {
-	tempByte, err := TempLogin(username, userId, duration)
+var LoginReq = func(username string, userId int, duration int) ([]byte, error) {
+	tempByte, err := TLogin(username, userId, duration)
 	if err != nil {
-		return nil, errors.New("Failed to insert into the login template: " + err.Error())
+		return nil, errors.New("Failed to insert into the TLogin template: " + err.Error())
 	}
 	recordField := tools.GetRecursiveField(tempByte, []types.Item{})
 	_, res := tools.Struct2Bytes(tempByte, recordField, []byte{})
 	return res, nil
 }
 
-// TempLogin Mortal 2026/5/18 16:04 初始化 login 所需字节，返回结构体
-var TempLogin = func(username string, userId int, duration int) (types.UdpRequest, error) {
+// TLogin Mortal 2026/5/18 16:04 初始化 login 所需字节，返回结构体
+var TLogin = func(username string, userId int, duration int) (types.UdpRequest, error) {
 	res, err := core.TempBase(userId, 0x01)
 	if err != nil {
 		return nil, err

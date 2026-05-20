@@ -8,39 +8,34 @@ import (
 	"github.com/renjietan/hytera-udp-protocol/types"
 )
 
-// KickOut 用户向电台发送踢出用户通知的订阅
-var KickOut = func(username string, userId int) ([]byte, error) {
-	tempByte, err := TempKickOut(username, userId)
+// SuperviseReq 心跳
+var SuperviseReq = func(userId int) ([]byte, error) {
+	tempByte, err := TSupervise(userId)
 	if err != nil {
-		return nil, errors.New("Failed to insert into the kickout template: " + err.Error())
+		return nil, errors.New("Failed to insert into the TSupervise template: " + err.Error())
 	}
 	recordField := tools.GetRecursiveField(tempByte, []types.Item{})
 	_, res := tools.Struct2Bytes(tempByte, recordField, []byte{})
 	return res, nil
 }
 
-var TempKickOut = func(password string, userId int) (types.UdpRequest, error) {
+func TSupervise(userId int) (types.UdpRequest, error) {
 	res, err := core.TempBase(userId, 0x01)
 	if err != nil {
 		return nil, err
 	}
-	bPwd, _ := tools.EncodeString(password, "UTF-16BE")
 	res = append(res, types.Item{
 		Name: "Payload",
 		Value: types.UdpRequest{{
 			Name:  "OptCode",
-			Value: 0x06,
+			Value: 0x03,
 			Size:  1,
 		}, {
 			Name: "OptData",
 			Value: types.UdpRequest{{
-				Name:  "Size",
-				Value: len(password),
+				Name:  "Status",
+				Value: 0x00,
 				Size:  1,
-			}, {
-				Name:  "UserName",
-				Value: bPwd,
-				Size:  len(bPwd),
 			}},
 			Size: 0,
 		}},

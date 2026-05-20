@@ -1,0 +1,2 @@
+- 注意:
+  - 由于不同的[原子操作码](info.AtomOpt.OptCode)，参数均不相同，所以[参数](info.AtomOpt.CallPara)需自行封装

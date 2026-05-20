@@ -1,4 +1,4 @@
-package auth
+package application_file
 
 import (
 	"errors"
@@ -8,19 +8,19 @@ import (
 	"github.com/renjietan/hytera-udp-protocol/types"
 )
 
-// Ping 心跳
-var Ping = func(userId int) ([]byte, error) {
-	tempByte, err := TempPing(userId)
+// WriteFileDataReq 写文件内容请求
+var WriteFileDataReq = func(FuncPoint, userId int) ([]byte, error) {
+	tempByte, err := TWriteFileDataReq(FuncPoint, userId)
 	if err != nil {
-		return nil, errors.New("Failed to insert into the ping template: " + err.Error())
+		return nil, errors.New("Failed to insert into the TWriteFileDataReq template: " + err.Error())
 	}
 	recordField := tools.GetRecursiveField(tempByte, []types.Item{})
 	_, res := tools.Struct2Bytes(tempByte, recordField, []byte{})
 	return res, nil
 }
 
-func TempPing(userId int) (types.UdpRequest, error) {
-	res, err := core.TempBase(userId, 0x01)
+var TWriteFileDataReq = func(FuncPoint, userId int) (types.UdpRequest, error) {
+	res, err := core.TempBase(userId, 0x04)
 	if err != nil {
 		return nil, err
 	}
@@ -28,14 +28,14 @@ func TempPing(userId int) (types.UdpRequest, error) {
 		Name: "Payload",
 		Value: types.UdpRequest{{
 			Name:  "OptCode",
-			Value: 0x03,
+			Value: 0x04,
 			Size:  1,
 		}, {
 			Name: "OptData",
 			Value: types.UdpRequest{{
-				Name:  "Status",
-				Value: 0x00,
-				Size:  1,
+				Name:  "FuncPoint",
+				Value: FuncPoint,
+				Size:  2,
 			}},
 			Size: 0,
 		}},

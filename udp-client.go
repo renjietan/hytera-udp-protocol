@@ -105,7 +105,7 @@ func (c *UdpClient) Login(RHost string, RPort int, username string, userId int, 
 	if errAddr != nil {
 		c.options.OnErrorFunc(types.Error(enums.EventLogin, enums.InvalidAddress, nil))
 	}
-	res, err := auth.Login(username, userId, int(c.options.Duration.Milliseconds()))
+	res, err := auth.LoginReq(username, userId, int(c.options.Duration.Milliseconds()))
 	if err != nil {
 		c.options.OnErrorFunc(types.Error(enums.EventLogin, err.Error(), address))
 		return
@@ -120,7 +120,7 @@ func (c *UdpClient) Ping(RHost string, RPort int, userId int) {
 		c.options.OnErrorFunc(types.Error(enums.EventPing, enums.InvalidAddress, nil))
 		return
 	}
-	res, err := auth.Ping(userId)
+	res, err := auth.SuperviseReq(userId)
 	if err != nil {
 		c.options.OnErrorFunc(types.Error(enums.EventPing, err.Error(), address))
 		return
