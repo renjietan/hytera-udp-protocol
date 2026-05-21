@@ -9,8 +9,9 @@ import (
 )
 
 // WriteFileInfoReq 写文件头信息请求
-var WriteFileInfoReq = func(FuncPoint, userId int) ([]byte, error) {
-	tempByte, err := TWriteFileInfoReq(FuncPoint, userId)
+var WriteFileInfoReq = func(params types.UdpWriteFileInfoReq, userId int) ([]byte, error) {
+
+	tempByte, err := TWriteFileInfoReq(params, userId)
 	if err != nil {
 		return nil, errors.New("Failed to insert into the TWriteFileInfoReq template: " + err.Error())
 	}
@@ -19,11 +20,17 @@ var WriteFileInfoReq = func(FuncPoint, userId int) ([]byte, error) {
 	return res, nil
 }
 
-var TWriteFileInfoReq = func(FuncPoint, userId int) (types.UdpRequest, error) {
+var TWriteFileInfoReq = func(params types.UdpWriteFileInfoReq, userId int) (types.UdpRequest, error) {
 	res, err := core.TempBase(userId, 0x04)
 	if err != nil {
 		return nil, err
 	}
+	FileBody := params.FileBody   // 文件内容（字节）
+	ChunkSize := params.ChunkSize // 每包字节长度
+	FileName := params.FileName   // 文件名（含相对路径）,例如：./FPGA/fh.bin
+	FileNameLen := core.GetStringSize(FileName)
+	FileCRC := params.FileCRC
+	Chunks := tools.ChunkByInterface(FileBody, ChunkSize) // 分包，返回数组
 	res = append(res, types.Item{
 		Name: "Payload",
 		Value: types.UdpRequest{{
@@ -33,9 +40,26 @@ var TWriteFileInfoReq = func(FuncPoint, userId int) (types.UdpRequest, error) {
 		}, {
 			Name: "OptData",
 			Value: types.UdpRequest{{
-				Name:  "FuncPoint",
-				Value: FuncPoint,
+				Name:  "FileCRC", // 整个文件CRC校验位
+				Value: FileCRC,
+				Size:  1,
+			}, {
+				Name:  "PacketCnt", // 文件分发的个数
+				Value: len(Chunks),
 				Size:  2,
+			}, {
+				Name:  "FileSize", // 文件长度
+				Value: len(FileBody),
+				Size:  4,
+			}, {
+				// TODO: 文件名称的字数 还是 文件名称的字节数
+				Name:  "NameLen", // 文件名长度
+				Value: FileNameLen,
+				Size:  4,
+			}, {
+				Name:  "FileName", // 文件名（含相对路径）
+				Value: FileName,   // 例如：./FPGA/fh.bin
+				Size:  len(FileName),
 			}},
 			Size: 0,
 		}},

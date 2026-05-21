@@ -25,6 +25,7 @@ var TReadFileInfoReq = func(FileName string, userId int) (types.UdpRequest, erro
 		return nil, err
 	}
 	_FileName := []byte(FileName)
+	FileNameLen := core.GetStringSize(FileName)
 	res = append(res, types.Item{
 		Name: "Payload",
 		Value: types.UdpRequest{{
@@ -35,7 +36,7 @@ var TReadFileInfoReq = func(FileName string, userId int) (types.UdpRequest, erro
 			Name: "OptData",
 			Value: types.UdpRequest{{
 				Name:  "NameSize",
-				Value: len(_FileName),
+				Value: FileNameLen,
 				Size:  4,
 			}, {
 				Name:  "FileName",
