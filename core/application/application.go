@@ -62,13 +62,13 @@ func TempApplication(info ApplicationInfo, userId int) (types.UdpRequest, error)
 				Value: info.AtomOpt.CallType,
 				Size:  1,
 			}, {
-				Name:  "ParaSize", // 调用参数总长度。
+				Name:  "ParaSize", // CallPara(调用参数)总长度。
 				Value: nil,
 				Size:  2,
 			}, {
-				Name:  "CallPara",
-				Value: info.AtomOpt.CallPara, // 调用参数
-				Size:  0,                     // 例如: 见(2.5.2.10.7) (0x0007) 子网参数配置
+				Name:  "CallPara",            // 调用参数
+				Value: info.AtomOpt.CallPara, // 例如: 见(2.5.2.10.7) (0x0007) 子网参数配置
+				Size:  0,
 			}},
 			Size: 0,
 		}},

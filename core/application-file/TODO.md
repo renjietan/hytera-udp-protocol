@@ -2,3 +2,4 @@
   - 0x07 (Tcp Read File Info Req)
   - 0x08 (Tcp Read File Ctrl Req)
   - 0x09 (Tcp Write File Req)
+  - 注意各种字段名称包含Name, 计算Name的字长度，还是Name的字节长度

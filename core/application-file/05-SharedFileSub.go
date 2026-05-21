@@ -9,8 +9,8 @@ import (
 )
 
 // SharedFileSub 共享文件订阅
-var SharedFileSub = func(FuncPoint, userId int) ([]byte, error) {
-	tempByte, err := TSharedFileSub(FuncPoint, userId)
+var SharedFileSub = func(FileName string, userId int) ([]byte, error) {
+	tempByte, err := TSharedFileSub(FileName, userId)
 	if err != nil {
 		return nil, errors.New("Failed to insert into the TSharedFileSub template: " + err.Error())
 	}
@@ -19,11 +19,13 @@ var SharedFileSub = func(FuncPoint, userId int) ([]byte, error) {
 	return res, nil
 }
 
-var TSharedFileSub = func(FuncPoint, userId int) (types.UdpRequest, error) {
+var TSharedFileSub = func(FileName string, userId int) (types.UdpRequest, error) {
 	res, err := core.TempBase(userId, 0x04)
 	if err != nil {
 		return nil, err
 	}
+	FileNameLen := core.GetStringSize(FileName)
+	FileNameByte := []byte(FileName)
 	res = append(res, types.Item{
 		Name: "Payload",
 		Value: types.UdpRequest{{
@@ -33,9 +35,13 @@ var TSharedFileSub = func(FuncPoint, userId int) (types.UdpRequest, error) {
 		}, {
 			Name: "OptData",
 			Value: types.UdpRequest{{
-				Name:  "FuncPoint",
-				Value: FuncPoint,
-				Size:  2,
+				Name:  "NameSize",
+				Value: FileNameLen,
+				Size:  4,
+			}, {
+				Name:  "FileName",
+				Value: FileNameByte,
+				Size:  len(FileNameByte),
 			}},
 			Size: 0,
 		}},

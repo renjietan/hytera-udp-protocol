@@ -73,6 +73,22 @@
             </set>
           </value>
         </entry>
+        <entry key="UdpWriteFileDataReq">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/types/udpWriteFile.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UdpWriteFileInfoReq">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/core/application-file/03-WriteFileInfoReq.go" />
+              <option value="file://$PROJECT_DIR$/types/tools.go" />
+              <option value="file://$PROJECT_DIR$/types/udpWriteFile.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="resetOptions">
           <value>
             <set>
@@ -98,6 +114,104 @@
     </option>
     <option name="scannedPathMapping">
       <map>
+        <entry key="file://$PROJECT_DIR$/core/application-extended.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779261982853" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/application-extended/01-RetrieveFuncPointReq.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779265471450" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/application-extended/02-RetrieveAtomOptReq.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779265608879" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/application-extended/03-RunFuncPointReq.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779265651786" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/application-extended/04-ListFuncPointsReq.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779265666636" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/application-extended/05-ReadFuncPointsListReq.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779265688875" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/application-extended/06-ListAtomOptsReq.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779265740718" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/application-extended/07-EnableResendAFSReq.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779265758840" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/application-file/01-ReadFileInfoReq.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779351263726" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/application-file/02-ReadFileDataReq.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779269729554" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/application-file/03-WriteFileInfoReq.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779351318088" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/application-file/04-WriteFileDataReq.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779350408095" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/application-file/05-SharedFileSub.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779351555134" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/application-file/README.md.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779266164989" />
+            </ScannedPath>
+          </value>
+        </entry>
         <entry key="file://$PROJECT_DIR$/core/application.go">
           <value>
             <ScannedPath>
@@ -108,7 +222,7 @@
         <entry key="file://$PROJECT_DIR$/core/application/application.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1779207342856" />
+              <option name="lastModified" value="1779351604151" />
               <option name="schema">
                 <list>
                   <option value="ApplicationInfo" />
@@ -117,10 +231,94 @@
             </ScannedPath>
           </value>
         </entry>
+        <entry key="file://$PROJECT_DIR$/core/auth/01-05-LoginReq.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779270807729" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/auth/02-LogoutReq.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779245169333" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/auth/02-logout.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779244221466" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/auth/03-Supervise.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779243724431" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/auth/03-SuperviseReq.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779245046026" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/auth/04-PasswordReq.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779245041901" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/auth/06-KickoutSub.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779245032296" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/auth/06-kickout.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779243904692" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/auth/07-KickoutReq.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779245159454" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/auth/09-LoginInfoReq.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779245305081" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/auth/10-AdapterInfoReq.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779245434780" />
+            </ScannedPath>
+          </value>
+        </entry>
         <entry key="file://$PROJECT_DIR$/core/auth/LoginInfo.go">
           <value>
             <ScannedPath>
               <option name="lastModified" value="1779197957065" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/auth/TODO.md.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779267258526" />
             </ScannedPath>
           </value>
         </entry>
@@ -176,12 +374,7 @@
         <entry key="file://$PROJECT_DIR$/core/core.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1779198002430" />
-              <option name="schema">
-                <list>
-                  <option value="Core" />
-                </list>
-              </option>
+              <option name="lastModified" value="1779351191544" />
             </ScannedPath>
           </value>
         </entry>
@@ -252,7 +445,7 @@
         <entry key="file://$PROJECT_DIR$/tools/common.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1779207919848" />
+              <option name="lastModified" value="1779343691292" />
             </ScannedPath>
           </value>
         </entry>
@@ -278,15 +471,47 @@
             </ScannedPath>
           </value>
         </entry>
+        <entry key="file://$PROJECT_DIR$/types/tools.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779347452367" />
+              <option name="schema">
+                <list>
+                  <option value="UdpWriteFileInfoReq" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/types/udpWriteFile.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779349825071" />
+              <option name="schema">
+                <list>
+                  <option value="UdpWriteFileInfoReq" />
+                  <option value="UdpWriteFileDataReq" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
         <entry key="file://$PROJECT_DIR$/udp-client.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1779197957047" />
+              <option name="lastModified" value="1779244520007" />
               <option name="schema">
                 <list>
                   <option value="UdpClient" />
                 </list>
               </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/../test/main.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779348368442" />
             </ScannedPath>
           </value>
         </entry>
@@ -307,6 +532,8 @@
         <entry key="timer_info" value="timerInfo" />
         <entry key="udp_client" value="UdpClient" />
         <entry key="udp_response" value="UdpResponse" />
+        <entry key="udp_write_file_data_req" value="UdpWriteFileDataReq" />
+        <entry key="udp_write_file_info_req" value="UdpWriteFileInfoReq" />
       </map>
     </option>
     <option name="lastTimeChecked" value="1779002763684" />
