@@ -339,7 +339,7 @@
         <entry key="file://$PROJECT_DIR$/core/auth/login.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1779208003784" />
+              <option name="lastModified" value="1779208095913" />
             </ScannedPath>
           </value>
         </entry>
@@ -445,7 +445,11 @@
         <entry key="file://$PROJECT_DIR$/tools/common.go">
           <value>
             <ScannedPath>
+<<<<<<< HEAD
+              <option name="lastModified" value="1779208090258" />
+=======
               <option name="lastModified" value="1779343691292" />
+>>>>>>> 0e0c7aeee29fece12e3f650859cca807ea1f392c
             </ScannedPath>
           </value>
         </entry>
