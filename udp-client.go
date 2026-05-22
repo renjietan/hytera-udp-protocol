@@ -55,7 +55,7 @@ func (c *UdpClient) onMsg() {
 			if ok && netErr.Timeout() {
 				continue
 			}
-			c.options.OnErrorFunc(types.Error(enums.EventReader, err.Error(), addr))
+			c.options.OnErrorFunc(tools.Error(enums.EventReader, err.Error(), addr))
 			continue
 		}
 		data := buf[:n]
@@ -65,7 +65,7 @@ func (c *UdpClient) onMsg() {
 			c.AuthReply(data, addr)
 		}
 		if c.options.OnMsgFunc != nil {
-			c.options.OnMsgFunc(types.Success("", data, "", addr))
+			c.options.OnMsgFunc(tools.Success("", data, "", addr))
 		}
 	}
 }
@@ -87,27 +87,27 @@ func (c *UdpClient) onClose() {
 func (c *UdpClient) Send(RHost string, RPort int, event string, b []byte) {
 	remoteAddr, err := tools.GenerateAddress(RHost, RPort)
 	if err != nil {
-		c.options.OnErrorFunc(types.Error("", enums.InvalidAddress, nil))
+		c.options.OnErrorFunc(tools.Error("", enums.InvalidAddress, nil))
 		return
 	}
 	_, err = c.conn.WriteToUDP(b, remoteAddr)
 	if err != nil {
-		c.options.OnErrorFunc(types.Error(event, err.Error(), remoteAddr))
+		c.options.OnErrorFunc(tools.Error(event, err.Error(), remoteAddr))
 		return
 	}
 	c.timeoutManager.Set(event, c.options.Duration, func() {
-		c.options.OnErrorFunc(types.Error(event, enums.ReplyTimeout, remoteAddr))
+		c.options.OnErrorFunc(tools.Error(event, enums.ReplyTimeout, remoteAddr))
 	})
 }
 
 func (c *UdpClient) Login(RHost string, RPort int, username string, userId int, alive bool) {
 	address, errAddr := tools.GenerateAddress(RHost, RPort)
 	if errAddr != nil {
-		c.options.OnErrorFunc(types.Error(enums.EventLogin, enums.InvalidAddress, nil))
+		c.options.OnErrorFunc(tools.Error(enums.EventLogin, enums.InvalidAddress, nil))
 	}
 	res, err := auth.LoginReq(username, userId, int(c.options.Duration.Milliseconds()))
 	if err != nil {
-		c.options.OnErrorFunc(types.Error(enums.EventLogin, err.Error(), address))
+		c.options.OnErrorFunc(tools.Error(enums.EventLogin, err.Error(), address))
 		return
 	}
 	fmt.Printf("login byte:%#v\n", res)
@@ -117,12 +117,12 @@ func (c *UdpClient) Login(RHost string, RPort int, username string, userId int, 
 func (c *UdpClient) Ping(RHost string, RPort int, userId int) {
 	address, errAddr := tools.GenerateAddress(RHost, RPort)
 	if errAddr != nil {
-		c.options.OnErrorFunc(types.Error(enums.EventPing, enums.InvalidAddress, nil))
+		c.options.OnErrorFunc(tools.Error(enums.EventPing, enums.InvalidAddress, nil))
 		return
 	}
 	res, err := auth.SuperviseReq(userId)
 	if err != nil {
-		c.options.OnErrorFunc(types.Error(enums.EventPing, err.Error(), address))
+		c.options.OnErrorFunc(tools.Error(enums.EventPing, err.Error(), address))
 		return
 	}
 	c.Send(RHost, RPort, enums.EventPing, res)
