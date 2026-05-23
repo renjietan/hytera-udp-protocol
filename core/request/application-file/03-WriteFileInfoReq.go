@@ -1,4 +1,4 @@
-package application_file
+package core_request_application_file
 
 import (
 	"errors"
@@ -28,7 +28,7 @@ var TWriteFileInfoReq = func(params types.UdpWriteFileInfoReq, userId int) (type
 	FileBody := params.FileBody   // 文件内容（字节）
 	ChunkSize := params.ChunkSize // 每包字节长度
 	FileName := params.FileName   // 文件名（含相对路径）,例如：./FPGA/fh.bin
-	FileNameLen := core.GetStringSize(FileName)
+	FileNameLen := tools.GetStringSize(FileName)
 	FileCRC := params.FileCRC
 	Chunks := tools.ChunkByInterface(FileBody, ChunkSize) // 分包，返回数组
 	res = append(res, types.Item{

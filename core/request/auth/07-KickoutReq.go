@@ -1,4 +1,4 @@
-package auth
+package core_request_auth
 
 import (
 	"errors"
@@ -8,18 +8,18 @@ import (
 	"github.com/renjietan/hytera-udp-protocol/types"
 )
 
-// PasswordReq 某些业务需要验证密码之后才能够使用，用户用此消息发送密码请求
-var PasswordReq = func(password string, userId int) ([]byte, error) {
-	tempByte, err := TPassword(password, userId)
+// KickOutReq 发送踢出用户请求，该操作受用户权限影响
+var KickOutReq = func(username string, userId int) ([]byte, error) {
+	tempByte, err := TKickOutReq(username, userId)
 	if err != nil {
-		return nil, errors.New("Failed to insert into the TPassword template: " + err.Error())
+		return nil, errors.New("Failed to insert into the TKickOutReq template: " + err.Error())
 	}
 	recordField := tools.GetRecursiveField(tempByte, []types.Item{})
 	_, res := tools.Struct2Bytes(tempByte, recordField, []byte{})
 	return res, nil
 }
 
-var TPassword = func(password string, userId int) (types.UdpRequest, error) {
+var TKickOutReq = func(password string, userId int) (types.UdpRequest, error) {
 	res, err := core.TempBase(userId, 0x01)
 	if err != nil {
 		return nil, err
@@ -29,7 +29,7 @@ var TPassword = func(password string, userId int) (types.UdpRequest, error) {
 		Name: "Payload",
 		Value: types.UdpRequest{{
 			Name:  "OptCode",
-			Value: 0x04,
+			Value: 0x07,
 			Size:  1,
 		}, {
 			Name: "OptData",

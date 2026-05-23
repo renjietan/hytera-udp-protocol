@@ -1,4 +1,4 @@
-package application_file
+package core_request_application_file
 
 import (
 	"errors"
@@ -24,7 +24,7 @@ var TSharedFileSub = func(FileName string, userId int) (types.UdpRequest, error)
 	if err != nil {
 		return nil, err
 	}
-	FileNameLen := core.GetStringSize(FileName)
+	FileNameLen := tools.GetStringSize(FileName)
 	FileNameByte := []byte(FileName)
 	res = append(res, types.Item{
 		Name: "Payload",

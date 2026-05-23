@@ -1,4 +1,4 @@
-package auth
+package core_request_auth
 
 import (
 	"errors"

@@ -1,4 +1,4 @@
-package auth
+package core_request_application_file
 
 import (
 	"errors"
@@ -8,19 +8,19 @@ import (
 	"github.com/renjietan/hytera-udp-protocol/types"
 )
 
-// SuperviseReq 心跳
-var SuperviseReq = func(userId int) ([]byte, error) {
-	tempByte, err := TSupervise(userId)
+// ReadFileDataReq 读文件内容请求
+var ReadFileDataReq = func(PacketNum, userId int) ([]byte, error) {
+	tempByte, err := TReadFileDataReq(PacketNum, userId)
 	if err != nil {
-		return nil, errors.New("Failed to insert into the TSupervise template: " + err.Error())
+		return nil, errors.New("Failed to insert into the TReadFileDataReq template: " + err.Error())
 	}
 	recordField := tools.GetRecursiveField(tempByte, []types.Item{})
 	_, res := tools.Struct2Bytes(tempByte, recordField, []byte{})
 	return res, nil
 }
 
-func TSupervise(userId int) (types.UdpRequest, error) {
-	res, err := core.TempBase(userId, 0x01)
+var TReadFileDataReq = func(PacketNum, userId int) (types.UdpRequest, error) {
+	res, err := core.TempBase(userId, 0x04)
 	if err != nil {
 		return nil, err
 	}
@@ -28,14 +28,14 @@ func TSupervise(userId int) (types.UdpRequest, error) {
 		Name: "Payload",
 		Value: types.UdpRequest{{
 			Name:  "OptCode",
-			Value: 0x03,
+			Value: 0x02,
 			Size:  1,
 		}, {
 			Name: "OptData",
 			Value: types.UdpRequest{{
-				Name:  "Status",
-				Value: 0x00,
-				Size:  1,
+				Name:  "PacketNum", // PacketNum 包编号
+				Value: PacketNum,   // 例如: 0，1，2，3
+				Size:  2,
 			}},
 			Size: 0,
 		}},

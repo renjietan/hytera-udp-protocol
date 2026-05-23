@@ -1,4 +1,4 @@
-package application_extended
+package core_request_auth
 
 import (
 	"errors"
@@ -8,34 +8,39 @@ import (
 	"github.com/renjietan/hytera-udp-protocol/types"
 )
 
-// EnableResendAFSReq 使能应用功能业务确认重发机制
-var EnableResendAFSReq = func(Version, userId int) ([]byte, error) {
-	tempByte, err := TEnableResendAFSReq(Version, userId)
+// KickOutSub 踢出用户的订阅
+var KickOutSub = func(username string, userId int) ([]byte, error) {
+	tempByte, err := TKickOutSub(username, userId)
 	if err != nil {
-		return nil, errors.New("Failed to insert into the TEnableResendAFSReq template: " + err.Error())
+		return nil, errors.New("Failed to insert into the TKickOutSub template: " + err.Error())
 	}
 	recordField := tools.GetRecursiveField(tempByte, []types.Item{})
 	_, res := tools.Struct2Bytes(tempByte, recordField, []byte{})
 	return res, nil
 }
 
-var TEnableResendAFSReq = func(Version, userId int) (types.UdpRequest, error) {
-	res, err := core.TempBase(userId, 0x03)
+var TKickOutSub = func(username string, userId int) (types.UdpRequest, error) {
+	res, err := core.TempBase(userId, 0x01)
 	if err != nil {
 		return nil, err
 	}
+	bPwd, _ := tools.EncodeString(username, "UTF-16BE")
 	res = append(res, types.Item{
 		Name: "Payload",
 		Value: types.UdpRequest{{
 			Name:  "OptCode",
-			Value: 0x07,
+			Value: 0x06,
 			Size:  1,
 		}, {
 			Name: "OptData",
 			Value: types.UdpRequest{{
-				Name:  "Version", // 确认重发机制版本号
-				Value: Version,   // 例如: 若版本号为V0.1，则该字段表示为0x01
-				Size:  2,
+				Name:  "Size",
+				Value: len(username),
+				Size:  1,
+			}, {
+				Name:  "UserName",
+				Value: bPwd,
+				Size:  len(bPwd),
 			}},
 			Size: 0,
 		}},

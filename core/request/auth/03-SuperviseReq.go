@@ -1,4 +1,4 @@
-package auth
+package core_request_auth
 
 import (
 	"errors"
@@ -8,23 +8,18 @@ import (
 	"github.com/renjietan/hytera-udp-protocol/types"
 )
 
-// AdapterInfo
-// 设备适配器类型：用户可以获取设备的所有适配器信息
-//   - 0x00    不限
-//   - 0x01    以太网
-//   - 0x02    串口
-//   - 0x03    被覆线
-var AdapterInfoReq = func(AdapterType int, userId int) ([]byte, error) {
-	tempByte, err := TAdapterInfoReq(AdapterType, userId)
+// SuperviseReq 心跳
+var SuperviseReq = func(userId int) ([]byte, error) {
+	tempByte, err := TSupervise(userId)
 	if err != nil {
-		return nil, errors.New("Failed to insert into the AdapterInfoReq template: " + err.Error())
+		return nil, errors.New("Failed to insert into the TSupervise template: " + err.Error())
 	}
 	recordField := tools.GetRecursiveField(tempByte, []types.Item{})
 	_, res := tools.Struct2Bytes(tempByte, recordField, []byte{})
 	return res, nil
 }
 
-var TAdapterInfoReq = func(AdapterType int, userId int) (types.UdpRequest, error) {
+func TSupervise(userId int) (types.UdpRequest, error) {
 	res, err := core.TempBase(userId, 0x01)
 	if err != nil {
 		return nil, err
@@ -33,13 +28,13 @@ var TAdapterInfoReq = func(AdapterType int, userId int) (types.UdpRequest, error
 		Name: "Payload",
 		Value: types.UdpRequest{{
 			Name:  "OptCode",
-			Value: 0x0a,
+			Value: 0x03,
 			Size:  1,
 		}, {
 			Name: "OptData",
 			Value: types.UdpRequest{{
-				Name:  "AdapterType",
-				Value: AdapterType,
+				Name:  "Status",
+				Value: 0x00,
 				Size:  1,
 			}},
 			Size: 0,

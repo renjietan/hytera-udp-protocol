@@ -1,4 +1,4 @@
-package auth
+package core_request_auth
 
 import (
 	"errors"
@@ -8,39 +8,39 @@ import (
 	"github.com/renjietan/hytera-udp-protocol/types"
 )
 
-// LogoutReq Logout 主动断开与电台的连接时向电台发送登出请求
-var LogoutReq = func(username string, userId int) ([]byte, error) {
-	tempByte, err := TLogout(username, userId)
+// AdapterInfo
+// 设备适配器类型：用户可以获取设备的所有适配器信息
+//   - 0x00    不限
+//   - 0x01    以太网
+//   - 0x02    串口
+//   - 0x03    被覆线
+var AdapterInfoReq = func(AdapterType int, userId int) ([]byte, error) {
+	tempByte, err := TAdapterInfoReq(AdapterType, userId)
 	if err != nil {
-		return nil, errors.New("Failed to insert into the TLogout template: " + err.Error())
+		return nil, errors.New("Failed to insert into the AdapterInfoReq template: " + err.Error())
 	}
 	recordField := tools.GetRecursiveField(tempByte, []types.Item{})
 	_, res := tools.Struct2Bytes(tempByte, recordField, []byte{})
 	return res, nil
 }
 
-var TLogout = func(username string, userId int) (types.UdpRequest, error) {
+var TAdapterInfoReq = func(AdapterType int, userId int) (types.UdpRequest, error) {
 	res, err := core.TempBase(userId, 0x01)
 	if err != nil {
 		return nil, err
 	}
-	bUsername, _ := tools.EncodeString(username, "UTF-16BE")
 	res = append(res, types.Item{
 		Name: "Payload",
 		Value: types.UdpRequest{{
 			Name:  "OptCode",
-			Value: 0x02,
+			Value: 0x0a,
 			Size:  1,
 		}, {
 			Name: "OptData",
 			Value: types.UdpRequest{{
-				Name:  "Size",
-				Value: len(username),
+				Name:  "AdapterType",
+				Value: AdapterType,
 				Size:  1,
-			}, {
-				Name:  "UserName",
-				Value: bUsername,
-				Size:  len(bUsername),
 			}},
 			Size: 0,
 		}},

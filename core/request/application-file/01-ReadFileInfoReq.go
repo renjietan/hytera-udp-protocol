@@ -1,4 +1,4 @@
-package application_file
+package core_request_application_file
 
 import (
 	"errors"
@@ -25,7 +25,7 @@ var TReadFileInfoReq = func(FileName string, userId int) (types.UdpRequest, erro
 		return nil, err
 	}
 	_FileName := []byte(FileName)
-	FileNameLen := core.GetStringSize(FileName)
+	FileNameLen := tools.GetStringSize(FileName)
 	res = append(res, types.Item{
 		Name: "Payload",
 		Value: types.UdpRequest{{

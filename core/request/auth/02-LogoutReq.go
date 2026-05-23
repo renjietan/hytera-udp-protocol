@@ -1,4 +1,4 @@
-package application_file
+package core_request_auth
 
 import (
 	"errors"
@@ -8,22 +8,23 @@ import (
 	"github.com/renjietan/hytera-udp-protocol/types"
 )
 
-// ReadFileDataReq 读文件内容请求
-var ReadFileDataReq = func(PacketNum, userId int) ([]byte, error) {
-	tempByte, err := TReadFileDataReq(PacketNum, userId)
+// LogoutReq Logout 主动断开与电台的连接时向电台发送登出请求
+var LogoutReq = func(username string, userId int) ([]byte, error) {
+	tempByte, err := TLogout(username, userId)
 	if err != nil {
-		return nil, errors.New("Failed to insert into the TReadFileDataReq template: " + err.Error())
+		return nil, errors.New("Failed to insert into the TLogout template: " + err.Error())
 	}
 	recordField := tools.GetRecursiveField(tempByte, []types.Item{})
 	_, res := tools.Struct2Bytes(tempByte, recordField, []byte{})
 	return res, nil
 }
 
-var TReadFileDataReq = func(PacketNum, userId int) (types.UdpRequest, error) {
-	res, err := core.TempBase(userId, 0x04)
+var TLogout = func(username string, userId int) (types.UdpRequest, error) {
+	res, err := core.TempBase(userId, 0x01)
 	if err != nil {
 		return nil, err
 	}
+	bUsername, _ := tools.EncodeString(username, "UTF-16BE")
 	res = append(res, types.Item{
 		Name: "Payload",
 		Value: types.UdpRequest{{
@@ -33,9 +34,13 @@ var TReadFileDataReq = func(PacketNum, userId int) (types.UdpRequest, error) {
 		}, {
 			Name: "OptData",
 			Value: types.UdpRequest{{
-				Name:  "PacketNum", // PacketNum 包编号
-				Value: PacketNum,   // 例如: 0，1，2，3
-				Size:  2,
+				Name:  "Size",
+				Value: len(username),
+				Size:  1,
+			}, {
+				Name:  "UserName",
+				Value: bUsername,
+				Size:  len(bUsername),
 			}},
 			Size: 0,
 		}},

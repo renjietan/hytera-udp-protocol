@@ -6,7 +6,7 @@ import (
 	"net"
 	"time"
 
-	"github.com/renjietan/hytera-udp-protocol/core/auth"
+	"github.com/renjietan/hytera-udp-protocol/core/request/auth"
 	"github.com/renjietan/hytera-udp-protocol/tools"
 	"github.com/renjietan/hytera-udp-protocol/types"
 	"github.com/renjietan/hytera-udp-protocol/types/enums"
@@ -105,7 +105,7 @@ func (c *UdpClient) Login(RHost string, RPort int, username string, userId int, 
 	if errAddr != nil {
 		c.options.OnErrorFunc(tools.Error(enums.EventLogin, enums.InvalidAddress, nil))
 	}
-	res, err := auth.LoginReq(username, userId, int(c.options.Duration.Milliseconds()))
+	res, err := core_request_auth.LoginReq(username, userId, int(c.options.Duration.Milliseconds()))
 	if err != nil {
 		c.options.OnErrorFunc(tools.Error(enums.EventLogin, err.Error(), address))
 		return
@@ -120,7 +120,7 @@ func (c *UdpClient) Ping(RHost string, RPort int, userId int) {
 		c.options.OnErrorFunc(tools.Error(enums.EventPing, enums.InvalidAddress, nil))
 		return
 	}
-	res, err := auth.SuperviseReq(userId)
+	res, err := core_request_auth.SuperviseReq(userId)
 	if err != nil {
 		c.options.OnErrorFunc(tools.Error(enums.EventPing, err.Error(), address))
 		return

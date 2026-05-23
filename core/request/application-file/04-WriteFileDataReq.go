@@ -1,4 +1,4 @@
-package application_file
+package core_request_application_file
 
 import (
 	"errors"

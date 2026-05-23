@@ -1,4 +1,4 @@
-package application_extended
+package core_request_application_extended
 
 import (
 	"errors"
@@ -8,18 +8,18 @@ import (
 	"github.com/renjietan/hytera-udp-protocol/types"
 )
 
-// ReadFuncPointsListReq 读取功能点列表请求
-var ReadFuncPointsListReq = func(SegmentIndex, userId int) ([]byte, error) {
-	tempByte, err := TReadFuncPointsListReq(SegmentIndex, userId)
+// ListAtomOptsReq 功能点支持的原子操作列表请求
+var ListAtomOptsReq = func(FuncPoint, userId int) ([]byte, error) {
+	tempByte, err := TListAtomOptsReq(FuncPoint, userId)
 	if err != nil {
-		return nil, errors.New("Failed to insert into the TReadFuncPointsListReq template: " + err.Error())
+		return nil, errors.New("Failed to insert into the TListAtomOptsReq template: " + err.Error())
 	}
 	recordField := tools.GetRecursiveField(tempByte, []types.Item{})
 	_, res := tools.Struct2Bytes(tempByte, recordField, []byte{})
 	return res, nil
 }
 
-var TReadFuncPointsListReq = func(SegmentIndex, userId int) (types.UdpRequest, error) {
+var TListAtomOptsReq = func(FuncPoint, userId int) (types.UdpRequest, error) {
 	res, err := core.TempBase(userId, 0x03)
 	if err != nil {
 		return nil, err
@@ -28,14 +28,14 @@ var TReadFuncPointsListReq = func(SegmentIndex, userId int) (types.UdpRequest, e
 		Name: "Payload",
 		Value: types.UdpRequest{{
 			Name:  "OptCode",
-			Value: 0x05,
+			Value: 0x06,
 			Size:  1,
 		}, {
 			Name: "OptData",
 			Value: types.UdpRequest{{
-				Name:  "SegmentIndex", // 段编号，从1开始
-				Value: SegmentIndex,
-				Size:  1,
+				Name:  "FuncPoint", // 功能点枚举，0为无效值
+				Value: FuncPoint,   // 例如: 见 2.5.3功能点 0x0008-波形管理功能点(功能点枚举，0为无效值)
+				Size:  2,
 			}},
 			Size: 0,
 		}},

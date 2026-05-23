@@ -1,4 +1,4 @@
-package application_extended
+package core_request_application_extended
 
 import (
 	"errors"
@@ -8,18 +8,18 @@ import (
 	"github.com/renjietan/hytera-udp-protocol/types"
 )
 
-// ListFuncPointsReq 功能点列表请求
-var ListFuncPointsReq = func(ListType, userId int) ([]byte, error) {
-	tempByte, err := TListFuncPointsReq(ListType, userId)
+// EnableResendAFSReq 使能应用功能业务确认重发机制
+var EnableResendAFSReq = func(Version, userId int) ([]byte, error) {
+	tempByte, err := TEnableResendAFSReq(Version, userId)
 	if err != nil {
-		return nil, errors.New("Failed to insert into the TListFuncPointsReq template: " + err.Error())
+		return nil, errors.New("Failed to insert into the TEnableResendAFSReq template: " + err.Error())
 	}
 	recordField := tools.GetRecursiveField(tempByte, []types.Item{})
 	_, res := tools.Struct2Bytes(tempByte, recordField, []byte{})
 	return res, nil
 }
 
-var TListFuncPointsReq = func(ListType, userId int) (types.UdpRequest, error) {
+var TEnableResendAFSReq = func(Version, userId int) (types.UdpRequest, error) {
 	res, err := core.TempBase(userId, 0x03)
 	if err != nil {
 		return nil, err
@@ -28,13 +28,13 @@ var TListFuncPointsReq = func(ListType, userId int) (types.UdpRequest, error) {
 		Name: "Payload",
 		Value: types.UdpRequest{{
 			Name:  "OptCode",
-			Value: 0x04,
+			Value: 0x07,
 			Size:  1,
 		}, {
 			Name: "OptData",
 			Value: types.UdpRequest{{
-				Name:  "ListType",
-				Value: ListType, // 0x01    所有正在运行的功能点	0x02    所有禁用的功能点。
+				Name:  "Version", // 确认重发机制版本号
+				Value: Version,   // 例如: 若版本号为V0.1，则该字段表示为0x01
 				Size:  2,
 			}},
 			Size: 0,
