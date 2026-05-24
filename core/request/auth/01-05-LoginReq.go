@@ -3,7 +3,7 @@ package core_request_auth
 import (
 	"errors"
 
-	"github.com/renjietan/hytera-udp-protocol/core"
+	"github.com/renjietan/hytera-udp-protocol/core/request"
 	"github.com/renjietan/hytera-udp-protocol/tools"
 	"github.com/renjietan/hytera-udp-protocol/types"
 )
@@ -17,29 +17,29 @@ var LoginReq = func(username string, userId int, duration int) ([]byte, error) {
 	if err != nil {
 		return nil, errors.New("Failed to insert into the TLogin template: " + err.Error())
 	}
-	recordField := tools.GetRecursiveField(tempByte, []types.Item{})
+	recordField := tools.GetRecursiveField(tempByte, []types.UdpRequestByteCodeItem{})
 	_, res := tools.Struct2Bytes(tempByte, recordField, []byte{})
 	return res, nil
 }
 
 // TLogin Mortal 2026/5/18 16:04 初始化 login 所需字节，返回结构体
-var TLogin = func(username string, userId int, duration int) (types.UdpRequest, error) {
-	res, err := core.TempBase(userId, 0x01)
+var TLogin = func(username string, userId int, duration int) (types.UdpRequestBytesCode, error) {
+	res, err := request.TempBase(userId, 0x01)
 	if err != nil {
 		return nil, err
 	}
 	bUsername, _ := tools.EncodeString(username, "UTF-16BE")
 	optCode := tools.Tern(duration > 0, 0x05, 0x01)
 	if optCode == 0x01 {
-		res = append(res, types.Item{
+		res = append(res, types.UdpRequestByteCodeItem{
 			Name: "Payload",
-			Value: types.UdpRequest{{
+			Value: types.UdpRequestBytesCode{{
 				Name:  "OptCode",
 				Value: optCode,
 				Size:  1,
 			}, {
 				Name: "OptData",
-				Value: types.UdpRequest{{
+				Value: types.UdpRequestBytesCode{{
 					Name:  "Size",
 					Value: len(username),
 					Size:  1,
@@ -53,20 +53,20 @@ var TLogin = func(username string, userId int, duration int) (types.UdpRequest, 
 			Size: 0,
 		})
 	} else {
-		res = append(res, types.Item{
+		res = append(res, types.UdpRequestByteCodeItem{
 			Name: "Payload",
-			Value: types.UdpRequest{{
+			Value: types.UdpRequestBytesCode{{
 				Name:  "OptCode",
 				Value: optCode,
 				Size:  1,
 			}, {
 				Name: "OptData",
-				Value: types.UdpRequest{{
+				Value: types.UdpRequestBytesCode{{
 					Name:  "SuperviseInterval",
 					Value: 3000,
 					Size:  4,
 				}, {
-					Name:  "superviseCnt",
+					Name:  "SuperviseCnt",
 					Value: 3,
 					Size:  2,
 				}, {

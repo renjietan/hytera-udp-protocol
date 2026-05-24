@@ -1,8 +1,8 @@
 package types
 
-type UdpRequest []Item
+type UdpRequestBytesCode []UdpRequestByteCodeItem
 
-type Item struct {
+type UdpRequestByteCodeItem struct {
 	Name  string `json:"name"`
 	Value any    `json:"value"`
 	Size  int    `json:"size"`
@@ -50,6 +50,6 @@ type ApplicationInfo struct {
 		CallType int
 		// 调用参数
 		// 例如: 见(2.5.2.10.7) (0x0007) 子网参数配置
-		CallPara UdpRequest
+		CallPara UdpRequestBytesCode
 	}
 }

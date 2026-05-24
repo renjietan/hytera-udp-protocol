@@ -3,7 +3,7 @@ package core_request_application_file
 import (
 	"errors"
 
-	"github.com/renjietan/hytera-udp-protocol/core"
+	"github.com/renjietan/hytera-udp-protocol/core/request"
 	"github.com/renjietan/hytera-udp-protocol/tools"
 	"github.com/renjietan/hytera-udp-protocol/types"
 )
@@ -15,13 +15,13 @@ var WriteFileInfoReq = func(params types.UdpWriteFileInfoReq, userId int) ([]byt
 	if err != nil {
 		return nil, errors.New("Failed to insert into the TWriteFileInfoReq template: " + err.Error())
 	}
-	recordField := tools.GetRecursiveField(tempByte, []types.Item{})
+	recordField := tools.GetRecursiveField(tempByte, []types.UdpRequestByteCodeItem{})
 	_, res := tools.Struct2Bytes(tempByte, recordField, []byte{})
 	return res, nil
 }
 
-var TWriteFileInfoReq = func(params types.UdpWriteFileInfoReq, userId int) (types.UdpRequest, error) {
-	res, err := core.TempBase(userId, 0x04)
+var TWriteFileInfoReq = func(params types.UdpWriteFileInfoReq, userId int) (types.UdpRequestBytesCode, error) {
+	res, err := request.TempBase(userId, 0x04)
 	if err != nil {
 		return nil, err
 	}
@@ -31,15 +31,15 @@ var TWriteFileInfoReq = func(params types.UdpWriteFileInfoReq, userId int) (type
 	FileNameLen := tools.GetStringSize(FileName)
 	FileCRC := params.FileCRC
 	Chunks := tools.ChunkByInterface(FileBody, ChunkSize) // 分包，返回数组
-	res = append(res, types.Item{
+	res = append(res, types.UdpRequestByteCodeItem{
 		Name: "Payload",
-		Value: types.UdpRequest{{
+		Value: types.UdpRequestBytesCode{{
 			Name:  "OptCode",
 			Value: 0x03,
 			Size:  1,
 		}, {
 			Name: "OptData",
-			Value: types.UdpRequest{{
+			Value: types.UdpRequestBytesCode{{
 				Name:  "FileCRC", // 整个文件CRC校验位
 				Value: FileCRC,
 				Size:  1,

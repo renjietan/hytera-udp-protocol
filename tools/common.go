@@ -1,12 +1,8 @@
 package tools
 
-import (
-	"github.com/renjietan/hytera-udp-protocol/types"
-)
-
-func ChunkByInterface[T types.ChunkInterface](data T, size int) []T {
+func ChunkByInterface(data []byte, size int) [][]byte {
 	length := len(data)
-	var res = []T{}
+	var res [][]byte
 	for i := 0; i < length; i += size {
 		end := i + size
 		if end > length {

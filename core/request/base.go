@@ -1,4 +1,4 @@
-package core
+package request
 
 import (
 	"errors"
@@ -7,11 +7,11 @@ import (
 	"github.com/renjietan/hytera-udp-protocol/types"
 )
 
-func TempBase(userId int, SAP int) (types.UdpRequest, error) {
+func TempBase(userId int, SAP int) (types.UdpRequestBytesCode, error) {
 	if userId > 255 || userId < 0 {
 		return nil, errors.New("userId 应在 0 - 255之间")
 	}
-	return types.UdpRequest{{
+	return types.UdpRequestBytesCode{{
 		Name:  "SrcID",
 		Value: 0xEE,
 		Size:  1,
@@ -42,8 +42,8 @@ func TempBase(userId int, SAP int) (types.UdpRequest, error) {
 	}}, nil
 }
 
-func Struct2Bytes(params types.UdpRequest) []byte {
-	refsField := tools.GetRecursiveField(params, []types.Item{})
+func Struct2Bytes(params types.UdpRequestBytesCode) []byte {
+	refsField := tools.GetRecursiveField(params, []types.UdpRequestByteCodeItem{})
 	_, res := tools.Struct2Bytes(params, refsField, []byte{})
 	return res
 }

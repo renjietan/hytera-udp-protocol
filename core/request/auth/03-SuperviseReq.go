@@ -3,7 +3,7 @@ package core_request_auth
 import (
 	"errors"
 
-	"github.com/renjietan/hytera-udp-protocol/core"
+	"github.com/renjietan/hytera-udp-protocol/core/request"
 	"github.com/renjietan/hytera-udp-protocol/tools"
 	"github.com/renjietan/hytera-udp-protocol/types"
 )
@@ -14,25 +14,25 @@ var SuperviseReq = func(userId int) ([]byte, error) {
 	if err != nil {
 		return nil, errors.New("Failed to insert into the TSupervise template: " + err.Error())
 	}
-	recordField := tools.GetRecursiveField(tempByte, []types.Item{})
+	recordField := tools.GetRecursiveField(tempByte, []types.UdpRequestByteCodeItem{})
 	_, res := tools.Struct2Bytes(tempByte, recordField, []byte{})
 	return res, nil
 }
 
-func TSupervise(userId int) (types.UdpRequest, error) {
-	res, err := core.TempBase(userId, 0x01)
+func TSupervise(userId int) (types.UdpRequestBytesCode, error) {
+	res, err := request.TempBase(userId, 0x01)
 	if err != nil {
 		return nil, err
 	}
-	res = append(res, types.Item{
+	res = append(res, types.UdpRequestByteCodeItem{
 		Name: "Payload",
-		Value: types.UdpRequest{{
+		Value: types.UdpRequestBytesCode{{
 			Name:  "OptCode",
 			Value: 0x03,
 			Size:  1,
 		}, {
 			Name: "OptData",
-			Value: types.UdpRequest{{
+			Value: types.UdpRequestBytesCode{{
 				Name:  "Status",
 				Value: 0x00,
 				Size:  1,

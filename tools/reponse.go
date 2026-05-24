@@ -25,7 +25,3 @@ var Error = func(event string, message string, address *net.UDPAddr) types.Envel
 		Address: address,
 	}
 }
-
-var Bytes2Struct = func(b []byte, v types.UdpResponse) error {
-	return nil
-}
