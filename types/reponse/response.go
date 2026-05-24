@@ -8,6 +8,11 @@ type UdpResponseBytesCode struct {
 	Version UdpResponseByteCodeItem
 	UserID  UdpResponseByteCodeItem
 	SAP     UdpResponseByteCodeItem
+	Payload any
+}
+
+type Payload struct {
+	OptCode UdpResponseByteCodeItem // 1 Byte
 	OptData any
 }
 

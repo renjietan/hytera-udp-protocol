@@ -1,4 +1,4 @@
-package ressponse
+package response
 
 import types "github.com/renjietan/hytera-udp-protocol/types/reponse"
 
