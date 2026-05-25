@@ -465,6 +465,13 @@
             </set>
           </value>
         </entry>
+        <entry key="UdpResponseBindStruct">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/core/ressponse/types/base.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="UdpResponseByteCodeItem">
           <value>
             <set>
@@ -1157,7 +1164,7 @@
         <entry key="file://$PROJECT_DIR$/core/ressponse/auth/types.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1779698994982" />
+              <option name="lastModified" value="1779723588842" />
               <option name="schema">
                 <list>
                   <option value="LoginAck" />
@@ -1186,7 +1193,7 @@
         <entry key="file://$PROJECT_DIR$/core/ressponse/reponse.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1779700182916" />
+              <option name="lastModified" value="1779724364722" />
             </ScannedPath>
           </value>
         </entry>
@@ -1273,13 +1280,13 @@
         <entry key="file://$PROJECT_DIR$/core/ressponse/types/base.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1779699051422" />
+              <option name="lastModified" value="1779723569469" />
               <option name="schema">
                 <list>
                   <option value="UdpResponseBytesCode" />
                   <option value="Payload" />
                   <option value="UdpResponseByteCodeItem" />
-                  <option value="UdpResonseBindStruct" />
+                  <option value="UdpResponseBindStruct" />
                 </list>
               </option>
             </ScannedPath>
@@ -1302,7 +1309,7 @@
         <entry key="file://$PROJECT_DIR$/main.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1779699576379" />
+              <option name="lastModified" value="1779721842665" />
             </ScannedPath>
           </value>
         </entry>
@@ -1668,6 +1675,7 @@
         <entry key="udp_request_byte_code_item" value="UdpRequestByteCodeItem" />
         <entry key="udp_resonse_bind_struct" value="UdpResonseBindStruct" />
         <entry key="udp_response" value="UdpResponse" />
+        <entry key="udp_response_bind_struct" value="UdpResponseBindStruct" />
         <entry key="udp_response_byte_code_item" value="UdpResponseByteCodeItem" />
         <entry key="udp_response_bytes_code" value="UdpResponseBytesCode" />
         <entry key="udp_write_file_data_req" value="UdpWriteFileDataReq" />

@@ -19,14 +19,30 @@ type Payload struct {
 type UdpResponseByteCodeItem struct {
 	Value interface{}
 	Size  int
-	Bind  UdpResonseBindStruct
+	Bind  UdpResponseBindStruct
 }
 
-type UdpResonseBindStruct struct {
+type UdpResponseBindValueType string
+
+const (
+	UdpResponseBindStructInt    UdpResponseBindValueType = "int"
+	UdpResponseBindStructString UdpResponseBindValueType = "string"
+	UdpResponseBindStructRange  UdpResponseBindValueType = "Range"
+)
+
+type UdpResponseBindFileName string
+
+const (
+	UdpResponseBindStructSize UdpResponseBindFileName = "Size"
+)
+
+type UdpResponseBindStruct struct {
 	Path      string
-	Callback  func(params ...any)
-	Value     interface{}
-	FieldName string
+	FieldName UdpResponseBindFileName
+	//Callback  func(params ...any)
+	Value     any
+	ValueType UdpResponseBindValueType // 对应字段的 类型
+	//Action    UdpResponseBindAction
 }
 
 //type UdpApplicationResponse struct {

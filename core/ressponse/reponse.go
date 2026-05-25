@@ -1,6 +1,7 @@
 package response
 
 import (
+	"encoding/binary"
 	"fmt"
 	"reflect"
 	"strings"
@@ -36,7 +37,7 @@ import (
 // params[v] 码流转换后的结构体指针，例如 lTemp := core_response_auth.LoginRes()
 // params[path] 当前循环的路径，例如 Payload.OptData.Status
 // params[bindPaths] 例如: 递归到 Payload.OptData.UserName 时，若 bindPaths 中存在该路径，则取出对应数据赋给 UserName 的 Size 字段
-func ByteCode2Stuct(b []byte, v interface{}, path string, bindPaths map[string]types.UdpResonseBindStruct) {
+func ByteCode2Stuct(b []byte, v interface{}, path string, bindPaths map[string]types.UdpResponseBindStruct) {
 	val := reflect.ValueOf(v)
 	if val.Kind() == reflect.Ptr {
 		val = val.Elem()
@@ -55,31 +56,48 @@ func ByteCode2Stuct(b []byte, v interface{}, path string, bindPaths map[string]t
 			sizeField := field.FieldByName("Size")
 			bindField := field.FieldByName("Bind")
 			rawBindField := bindField.Interface()
-			originalBind, ok := rawBindField.(types.UdpResonseBindStruct)
-			if !ok {
-				originalBind = types.UdpResonseBindStruct{}
-			}
-			//callbackField := bindField.FieldByName("Callback")
+			originalBind, _ := rawBindField.(types.UdpResponseBindStruct)
 
 			if valueField.IsValid() && valueField.CanSet() {
 				s := 0
 				if sizeField.Int() == 0 {
 					s = len(b)
 					sizeField.Set(reflect.ValueOf(s))
-					value := bindPaths[currentPath]
-					if value.Callback != nil {
-						value.Callback(valueField.Addr().Interface())
-					}
 				} else {
 					s = int(sizeField.Int())
-					if originalBind.Path != "" {
-						bindPaths[originalBind.Path] = originalBind
+				}
+				// 循环到 bind 的字段时，重新赋值
+				value := bindPaths[currentPath]
+				Path := value.Path
+				ValueType := value.ValueType
+				FieldName := value.FieldName
+				if Path != "" {
+					if ValueType == types.UdpResponseBindStructInt {
+						s = value.Value.(int)
+						if FieldName == types.UdpResponseBindStructSize {
+							sizeField.Set(reflect.ValueOf(s))
+						}
 					}
-					fmt.Println("bindPaths==============", currentPath, bindPaths)
 				}
 				forwardByte := tools.NewSafeBytes(b).Slice(s, enums.Forward)
 				backendByte := tools.NewSafeBytes(b).Slice(s, enums.Backward)
 				valueField.Set(reflect.ValueOf(forwardByte.Data))
+				// 存在 bind  字段时，存下来
+				if originalBind.Path != "" {
+					if originalBind.ValueType == types.UdpResponseBindStructString {
+						originalBind.Value = string(forwardByte.Data)
+					} else if originalBind.ValueType == types.UdpResponseBindStructInt {
+						pathSlice := strings.Split(originalBind.Path, ".")
+						ext := pathSlice[len(pathSlice)-1]
+						if ext == "UserName" {
+							originalBind.Value = int(BytesToUintBE(forwardByte.Data)) * 2
+						} else {
+							originalBind.Value = int(BytesToUintBE(forwardByte.Data))
+						}
+					}
+					bindPaths[originalBind.Path] = originalBind
+				}
+				fmt.Println(currentPath, "===================", bindPaths)
 				b = backendByte.Data
 			}
 			fmt.Println(currentPath)
@@ -109,10 +127,19 @@ func ByteCode2Stuct(b []byte, v interface{}, path string, bindPaths map[string]t
 	}
 }
 
-func GetBasePath(v string) string {
-	s := strings.Split(v, ".")
-	ns := s[:len(s)-1]
-	return strings.Join(ns, ".")
+func BytesToUintBE(b []byte) uint64 {
+	switch len(b) {
+	case 1:
+		return uint64(b[0])
+	case 2:
+		return uint64(binary.BigEndian.Uint16(b))
+	case 4:
+		return uint64(binary.BigEndian.Uint32(b))
+	case 8:
+		return binary.BigEndian.Uint64(b)
+	default:
+		return 0
+	}
 }
 
 //func ByteCode2Stuct(b []byte, v reflect.Value) {

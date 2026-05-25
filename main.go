@@ -36,8 +36,12 @@ func main() {
 	b := []byte{0xee, 0xee, 0x0, 0x17, 0x0, 0x0, 0x0, 0xb, 0x1, 0x5, 0x05,
 		0x0, 0x61, 0x0, 0x64, 0x0, 0x6d, 0x0, 0x69, 0x0, 0x6e, 0x0c}
 	lTemp := core_response_auth.KickOutUserNtyRes()
-	response.ByteCode2Stuct(b, &lTemp, "", map[string]types2.UdpResonseBindStruct{})
-	fmt.Println(lTemp)
+	response.ByteCode2Stuct(b, &lTemp, "", map[string]types2.UdpResponseBindStruct{})
+	//marshal, err := json.Marshal(lTemp)
+	//if err != nil {
+	//	return
+	//}
+	fmt.Printf("lTemp: %#v\n", lTemp)
 	quit := make(chan os.Signal, 1)
 	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
 	<-quit

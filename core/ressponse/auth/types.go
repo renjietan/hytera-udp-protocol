@@ -1,8 +1,6 @@
 package core_response_auth
 
 import (
-	"fmt"
-
 	response "github.com/renjietan/hytera-udp-protocol/core/ressponse"
 	"github.com/renjietan/hytera-udp-protocol/core/ressponse/types"
 )
@@ -146,11 +144,14 @@ func NewKickOutInfoNty() types.Payload {
 		Size: types.UdpResponseByteCodeItem{
 			Value: []byte{},
 			Size:  1,
-			Bind: types.UdpResonseBindStruct{
-				Path: "Payload.OptData.UserName",
-				Callback: func(params ...any) {
-					fmt.Println("============Func", params)
-				},
+			Bind: types.UdpResponseBindStruct{
+				Path:      "Payload.OptData.UserName",
+				FieldName: types.UdpResponseBindStructSize,
+				//Callback: func(params ...any) {
+				//	fmt.Println("NewKickOutInfoNty Func===============", params)
+				//},
+				Value:     nil,
+				ValueType: types.UdpResponseBindStructInt,
 			}, // 下面 UserName 字段
 		},
 		UserName: types.UdpResponseByteCodeItem{
