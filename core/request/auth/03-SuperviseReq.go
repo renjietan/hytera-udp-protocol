@@ -27,12 +27,15 @@ func TSupervise(userId int) (types.UdpRequestBytesCode, error) {
 	res = append(res, types.UdpRequestByteCodeItem{
 		Name: "Payload",
 		Value: types.UdpRequestBytesCode{{
-			Name:  "OptCode",
+			Name:  "OptCode", // 操作码
 			Value: 0x03,
 			Size:  1,
 		}, {
 			Name: "OptData",
 			Value: types.UdpRequestBytesCode{{
+				// 运行状态：
+				// 0x00    正常。
+				// 0x01    运行错误
 				Name:  "Status",
 				Value: 0x00,
 				Size:  1,

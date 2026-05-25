@@ -30,7 +30,7 @@ var TWriteFileInfoReq = func(params types.UdpWriteFileInfoReq, userId int) (type
 	FileName := params.FileName   // 文件名（含相对路径）,例如：./FPGA/fh.bin
 	FileNameLen := tools.GetStringSize(FileName)
 	FileCRC := params.FileCRC
-	Chunks := tools.ChunkByInterface(FileBody, ChunkSize) // 分包，返回数组
+	Chunks := tools.ChunkByBytes(FileBody, ChunkSize) // 分包，返回数组
 	res = append(res, types.UdpRequestByteCodeItem{
 		Name: "Payload",
 		Value: types.UdpRequestBytesCode{{

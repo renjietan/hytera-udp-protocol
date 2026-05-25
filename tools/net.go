@@ -6,6 +6,7 @@ import (
 	"net"
 )
 
+// GenerateAddress 组装UDP的IP
 func GenerateAddress(RHost string, RPort int) (*net.UDPAddr, error) {
 	// 校验: 远程IP
 	address := fmt.Sprintf("%s:%v", RHost, RPort)

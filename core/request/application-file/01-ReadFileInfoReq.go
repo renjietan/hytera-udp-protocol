@@ -35,7 +35,7 @@ var TReadFileInfoReq = func(FileName string, userId int) (types.UdpRequestBytesC
 		}, {
 			Name: "OptData",
 			Value: types.UdpRequestBytesCode{{
-				Name:  "NameSize",
+				Name:  "NameSize", // 文件名长度
 				Value: FileNameLen,
 				Size:  4,
 			}, {

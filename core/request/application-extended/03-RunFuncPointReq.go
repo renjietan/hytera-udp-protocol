@@ -37,8 +37,10 @@ var TRunFuncPointReq = func(FuncPoint, RunType, userId int) (types.UdpRequestByt
 				Value: FuncPoint,   // 例如: 见 2.5.3功能点 0x0008-波形管理功能点(功能点枚举，0为无效值)
 				Size:  2,
 			}, {
-				Name:  "RunType",
-				Value: RunType, // 例如：0x01    运行	0x02    禁用
+				Name: "RunType",
+				// 0x01-运行
+				// 0x02-禁用
+				Value: RunType,
 				Size:  1,
 			}},
 			Size: 0,

@@ -11,10 +11,10 @@ import (
 // WriteFileDataReq 写文件内容请求
 var WriteFileDataReq = func(params types.UdpWriteFileDataReq, userId int) ([]byte, error) {
 	var res = []byte{}
-	PacketCrc := params.PacketCrc                          // 每包检验和
-	PacketSize := params.PacketSize                        // 单个包的大小
-	FileBody := params.FileBody                            // 文件内容（字节）
-	Chunks := tools.ChunkByInterface(FileBody, PacketSize) // 分包
+	PacketCrc := params.PacketCrc                      // 每包检验和
+	PacketSize := params.PacketSize                    // 单个包的大小
+	FileBody := params.FileBody                        // 文件内容（字节）
+	Chunks := tools.ChunkByBytes(FileBody, PacketSize) // 分包
 
 	for index, value := range Chunks {
 		tempByte, err := TWriteFileDataReq(PacketCrc, index, PacketSize, value, userId)

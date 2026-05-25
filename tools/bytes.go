@@ -78,6 +78,7 @@ func Struct2Bytes(params types.UdpRequestBytesCode, t []types.UdpRequestByteCode
 	return t, res
 }
 
+// Uint2Bytes 数字转多字节
 func Uint2Bytes(val uint64, size int, IsLe bool) ([]byte, error) {
 	buf := make([]byte, size)
 	if size == 1 {
@@ -159,4 +160,17 @@ func EncodeString(s string, encoding string) ([]byte, error) {
 	default:
 		return nil, nil
 	}
+}
+
+func ChunkByBytes(data []byte, size int) [][]byte {
+	length := len(data)
+	var res [][]byte
+	for i := 0; i < length; i += size {
+		end := i + size
+		if end > length {
+			end = length
+		}
+		res = append(res, data[i:end])
+	}
+	return res
 }

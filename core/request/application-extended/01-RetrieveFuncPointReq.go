@@ -33,7 +33,7 @@ var TRetrieveFuncPointReq = func(FuncPoint, userId int) (types.UdpRequestBytesCo
 		}, {
 			Name: "OptData",
 			Value: types.UdpRequestBytesCode{{
-				Name:  "FuncPoint",
+				Name:  "FuncPoint", // 功能点枚举，0为无效值
 				Value: FuncPoint,
 				Size:  2,
 			}},

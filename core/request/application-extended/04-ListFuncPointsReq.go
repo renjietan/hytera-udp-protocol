@@ -8,7 +8,7 @@ import (
 	"github.com/renjietan/hytera-udp-protocol/types"
 )
 
-// ListFuncPointsReq 功能点列表请求
+// ListFuncPointsReq User向目标机发送功能点列表请求
 var ListFuncPointsReq = func(ListType, userId int) ([]byte, error) {
 	tempByte, err := TListFuncPointsReq(ListType, userId)
 	if err != nil {
@@ -33,8 +33,10 @@ var TListFuncPointsReq = func(ListType, userId int) (types.UdpRequestBytesCode, 
 		}, {
 			Name: "OptData",
 			Value: types.UdpRequestBytesCode{{
-				Name:  "ListType",
-				Value: ListType, // 0x01    所有正在运行的功能点	0x02    所有禁用的功能点。
+				Name: "ListType",
+				// 0x01-所有正在运行的功能点
+				// 0x02-所有禁用的功能点。
+				Value: ListType,
 				Size:  2,
 			}},
 			Size: 0,

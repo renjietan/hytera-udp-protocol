@@ -28,17 +28,17 @@ var TPassword = func(password string, userId int) (types.UdpRequestBytesCode, er
 	res = append(res, types.UdpRequestByteCodeItem{
 		Name: "Payload",
 		Value: types.UdpRequestBytesCode{{
-			Name:  "OptCode",
+			Name:  "OptCode", // 操作码
 			Value: 0x04,
 			Size:  1,
 		}, {
 			Name: "OptData",
 			Value: types.UdpRequestBytesCode{{
-				Name:  "Size",
+				Name:  "Size", // 密码的字的个数，最大30个字
 				Value: len(password),
 				Size:  1,
 			}, {
-				Name:  "UserName",
+				Name:  "UserName", // UTF-16BE编码。最大长度30个字，不包括0结尾
 				Value: bPwd,
 				Size:  len(bPwd),
 			}},

@@ -32,12 +32,17 @@ var TAdapterInfoReq = func(AdapterType int, userId int) (types.UdpRequestBytesCo
 	res = append(res, types.UdpRequestByteCodeItem{
 		Name: "Payload",
 		Value: types.UdpRequestBytesCode{{
-			Name:  "OptCode",
+			Name:  "OptCode", // 操作码
 			Value: 0x0a,
 			Size:  1,
 		}, {
 			Name: "OptData",
 			Value: types.UdpRequestBytesCode{{
+				// 设备适配器类型：
+				// 0x00    不限
+				// 0x01    以太网
+				// 0x02    串口
+				// 0x03    被覆线
 				Name:  "AdapterType",
 				Value: AdapterType,
 				Size:  1,

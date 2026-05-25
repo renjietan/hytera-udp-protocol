@@ -34,17 +34,17 @@ var TLogin = func(username string, userId int, duration int) (types.UdpRequestBy
 		res = append(res, types.UdpRequestByteCodeItem{
 			Name: "Payload",
 			Value: types.UdpRequestBytesCode{{
-				Name:  "OptCode",
+				Name:  "OptCode", // 操作码
 				Value: optCode,
 				Size:  1,
 			}, {
 				Name: "OptData",
 				Value: types.UdpRequestBytesCode{{
-					Name:  "Size",
+					Name:  "Size", // 用户名的字的个数，最大40个字
 					Value: len(username),
 					Size:  1,
 				}, {
-					Name:  "UserName",
+					Name:  "UserName", // UTF-16BE编码。最大长度40个字，用户名不允许重复，如果用户名相同，电台返回用户已登录，由客户端重新命名自己的用户名
 					Value: bUsername,
 					Size:  len(bUsername),
 				}},
@@ -62,12 +62,12 @@ var TLogin = func(username string, userId int, duration int) (types.UdpRequestBy
 			}, {
 				Name: "OptData",
 				Value: types.UdpRequestBytesCode{{
-					Name:  "SuperviseInterval",
-					Value: 3000,
+					Name:  "SuperviseInterval", // 心跳检测间隔。单位：毫秒。最小值：100
+					Value: duration,
 					Size:  4,
 				}, {
-					Name:  "SuperviseCnt",
-					Value: 3,
+					Name:  "SuperviseCnt", // 心跳检测次数
+					Value: 3,              // 数字必须 > 2; 0、1、2为无效值
 					Size:  2,
 				}, {
 					Name:  "Size",

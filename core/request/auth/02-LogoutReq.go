@@ -28,17 +28,17 @@ var TLogout = func(username string, userId int) (types.UdpRequestBytesCode, erro
 	res = append(res, types.UdpRequestByteCodeItem{
 		Name: "Payload",
 		Value: types.UdpRequestBytesCode{{
-			Name:  "OptCode",
+			Name:  "OptCode", // 操作码
 			Value: 0x02,
 			Size:  1,
 		}, {
 			Name: "OptData",
 			Value: types.UdpRequestBytesCode{{
-				Name:  "Size",
+				Name:  "Size", // 用户名的字的个数，最大40个字
 				Value: len(username),
 				Size:  1,
 			}, {
-				Name:  "UserName",
+				Name:  "UserName", // UTF-16BE编码。最大长度40个字
 				Value: bUsername,
 				Size:  len(bUsername),
 			}},

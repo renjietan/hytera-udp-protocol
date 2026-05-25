@@ -33,7 +33,7 @@ var TReadFileDataReq = func(PacketNum, userId int) (types.UdpRequestBytesCode, e
 		}, {
 			Name: "OptData",
 			Value: types.UdpRequestBytesCode{{
-				Name:  "PacketNum", // PacketNum 包编号
+				Name:  "PacketNum", // PacketNum 文件包编号
 				Value: PacketNum,   // 例如: 0，1，2，3
 				Size:  2,
 			}},
