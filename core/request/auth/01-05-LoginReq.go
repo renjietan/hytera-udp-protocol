@@ -4,8 +4,8 @@ import (
 	"errors"
 
 	"github.com/renjietan/hytera-udp-protocol/core/request"
+	"github.com/renjietan/hytera-udp-protocol/core/request/types"
 	"github.com/renjietan/hytera-udp-protocol/tools"
-	"github.com/renjietan/hytera-udp-protocol/types"
 )
 
 // LoginReq 登录
@@ -17,8 +17,7 @@ var LoginReq = func(username string, userId int, duration int) ([]byte, error) {
 	if err != nil {
 		return nil, errors.New("Failed to insert into the TLogin template: " + err.Error())
 	}
-	recordField := tools.GetRecursiveField(tempByte, []types.UdpRequestByteCodeItem{})
-	_, res := tools.Struct2Bytes(tempByte, recordField, []byte{})
+	res := request.Struct2BytesCode(tempByte)
 	return res, nil
 }
 
@@ -28,7 +27,7 @@ var TLogin = func(username string, userId int, duration int) (types.UdpRequestBy
 	if err != nil {
 		return nil, err
 	}
-	bUsername, _ := tools.EncodeString(username, "UTF-16BE")
+	bUsername, _ := request.EncodeString(username, "UTF-16BE")
 	optCode := tools.Tern(duration > 0, 0x05, 0x01)
 	if optCode == 0x01 {
 		res = append(res, types.UdpRequestByteCodeItem{

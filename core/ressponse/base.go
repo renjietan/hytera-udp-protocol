@@ -1,6 +1,8 @@
 package response
 
-import types "github.com/renjietan/hytera-udp-protocol/types/reponse"
+import (
+	types "github.com/renjietan/hytera-udp-protocol/core/ressponse/types"
+)
 
 func TempBase() types.UdpResponseBytesCode {
 	return types.UdpResponseBytesCode{
@@ -32,5 +34,15 @@ func TempBase() types.UdpResponseBytesCode {
 			Value: []byte{},
 			Size:  1,
 		},
+	}
+}
+
+func TempPayload(optData any) types.Payload {
+	return types.Payload{
+		OptCode: types.UdpResponseByteCodeItem{
+			Value: []byte{},
+			Size:  1,
+		},
+		OptData: optData,
 	}
 }

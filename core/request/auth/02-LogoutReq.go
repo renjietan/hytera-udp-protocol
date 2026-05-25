@@ -4,8 +4,7 @@ import (
 	"errors"
 
 	"github.com/renjietan/hytera-udp-protocol/core/request"
-	"github.com/renjietan/hytera-udp-protocol/tools"
-	"github.com/renjietan/hytera-udp-protocol/types"
+	"github.com/renjietan/hytera-udp-protocol/core/request/types"
 )
 
 // LogoutReq Logout 主动断开与电台的连接时向电台发送登出请求
@@ -14,8 +13,7 @@ var LogoutReq = func(username string, userId int) ([]byte, error) {
 	if err != nil {
 		return nil, errors.New("Failed to insert into the TLogout template: " + err.Error())
 	}
-	recordField := tools.GetRecursiveField(tempByte, []types.UdpRequestByteCodeItem{})
-	_, res := tools.Struct2Bytes(tempByte, recordField, []byte{})
+	res := request.Struct2BytesCode(tempByte)
 	return res, nil
 }
 
@@ -24,7 +22,7 @@ var TLogout = func(username string, userId int) (types.UdpRequestBytesCode, erro
 	if err != nil {
 		return nil, err
 	}
-	bUsername, _ := tools.EncodeString(username, "UTF-16BE")
+	bUsername, _ := request.EncodeString(username, "UTF-16BE")
 	res = append(res, types.UdpRequestByteCodeItem{
 		Name: "Payload",
 		Value: types.UdpRequestBytesCode{{

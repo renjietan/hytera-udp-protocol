@@ -4,8 +4,7 @@ import (
 	"errors"
 
 	"github.com/renjietan/hytera-udp-protocol/core/request"
-	"github.com/renjietan/hytera-udp-protocol/tools"
-	"github.com/renjietan/hytera-udp-protocol/types"
+	"github.com/renjietan/hytera-udp-protocol/core/request/types"
 )
 
 // KickOutReq 发送踢出用户请求，该操作受用户权限影响
@@ -14,8 +13,7 @@ var KickOutReq = func(username string, userId int) ([]byte, error) {
 	if err != nil {
 		return nil, errors.New("Failed to insert into the TKickOutReq template: " + err.Error())
 	}
-	recordField := tools.GetRecursiveField(tempByte, []types.UdpRequestByteCodeItem{})
-	_, res := tools.Struct2Bytes(tempByte, recordField, []byte{})
+	res := request.Struct2BytesCode(tempByte)
 	return res, nil
 }
 
@@ -24,7 +22,7 @@ var TKickOutReq = func(password string, userId int) (types.UdpRequestBytesCode, 
 	if err != nil {
 		return nil, err
 	}
-	bPwd, _ := tools.EncodeString(password, "UTF-16BE")
+	bPwd, _ := request.EncodeString(password, "UTF-16BE")
 	res = append(res, types.UdpRequestByteCodeItem{
 		Name: "Payload",
 		Value: types.UdpRequestBytesCode{{

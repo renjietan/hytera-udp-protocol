@@ -16,6 +16,19 @@ type Payload struct {
 	OptData any
 }
 
+type UdpResponseByteCodeItem struct {
+	Value interface{}
+	Size  int
+	Bind  UdpResonseBindStruct
+}
+
+type UdpResonseBindStruct struct {
+	Path      string
+	Callback  func(params ...any)
+	Value     interface{}
+	FieldName string
+}
+
 //type UdpApplicationResponse struct {
 //	SrcID   UdpBaseResponse
 //	DstID   UdpBaseResponse
@@ -65,8 +78,3 @@ type Payload struct {
 //	OptCode UdpBaseResponse
 //	OptData UdpBaseResponse
 //}
-
-type UdpResponseByteCodeItem struct {
-	Value interface{}
-	Size  int
-}

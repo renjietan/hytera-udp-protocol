@@ -4,8 +4,7 @@ import (
 	"errors"
 
 	"github.com/renjietan/hytera-udp-protocol/core/request"
-	"github.com/renjietan/hytera-udp-protocol/tools"
-	"github.com/renjietan/hytera-udp-protocol/types"
+	"github.com/renjietan/hytera-udp-protocol/core/request/types"
 )
 
 // SuperviseReq 心跳
@@ -14,8 +13,7 @@ var SuperviseReq = func(userId int) ([]byte, error) {
 	if err != nil {
 		return nil, errors.New("Failed to insert into the TSupervise template: " + err.Error())
 	}
-	recordField := tools.GetRecursiveField(tempByte, []types.UdpRequestByteCodeItem{})
-	_, res := tools.Struct2Bytes(tempByte, recordField, []byte{})
+	res := request.Struct2BytesCode(tempByte)
 	return res, nil
 }
 

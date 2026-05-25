@@ -3,8 +3,7 @@ package request
 import (
 	"errors"
 
-	"github.com/renjietan/hytera-udp-protocol/tools"
-	"github.com/renjietan/hytera-udp-protocol/types"
+	"github.com/renjietan/hytera-udp-protocol/core/request/types"
 )
 
 func TempBase(userId int, SAP int) (types.UdpRequestBytesCode, error) {
@@ -40,10 +39,4 @@ func TempBase(userId int, SAP int) (types.UdpRequestBytesCode, error) {
 		Value: SAP,
 		Size:  1,
 	}}, nil
-}
-
-func Struct2Bytes(params types.UdpRequestBytesCode) []byte {
-	refsField := tools.GetRecursiveField(params, []types.UdpRequestByteCodeItem{})
-	_, res := tools.Struct2Bytes(params, refsField, []byte{})
-	return res
 }

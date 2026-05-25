@@ -1,9 +1,9 @@
-package tools
+package client
 
 import (
 	"net"
 
-	"github.com/renjietan/hytera-udp-protocol/types"
+	"github.com/renjietan/hytera-udp-protocol/client/types"
 )
 
 var Success = func(event string, data any, message string, address *net.UDPAddr) types.Envelope {

@@ -1,4 +1,4 @@
-package main
+package client
 
 import (
 	"errors"
@@ -6,9 +6,9 @@ import (
 	"net"
 	"time"
 
+	"github.com/renjietan/hytera-udp-protocol/client/types"
 	"github.com/renjietan/hytera-udp-protocol/core/request/auth"
 	"github.com/renjietan/hytera-udp-protocol/tools"
-	"github.com/renjietan/hytera-udp-protocol/types"
 	"github.com/renjietan/hytera-udp-protocol/types/enums"
 )
 
@@ -55,7 +55,7 @@ func (c *UdpClient) onMsg() {
 			if ok && netErr.Timeout() {
 				continue
 			}
-			c.options.OnErrorFunc(tools.Error(enums.EventReader, err.Error(), addr))
+			c.options.OnErrorFunc(Error(enums.EventReader, err.Error(), addr))
 			continue
 		}
 		data := buf[:n]
@@ -65,7 +65,7 @@ func (c *UdpClient) onMsg() {
 			c.AuthReply(data, addr)
 		}
 		if c.options.OnMsgFunc != nil {
-			c.options.OnMsgFunc(tools.Success("", data, "", addr))
+			c.options.OnMsgFunc(Success("", data, "", addr))
 		}
 	}
 }
@@ -85,29 +85,29 @@ func (c *UdpClient) onClose() {
 //		}
 //	}
 func (c *UdpClient) Send(RHost string, RPort int, event string, b []byte) {
-	remoteAddr, err := tools.GenerateAddress(RHost, RPort)
+	remoteAddr, err := GenerateAddress(RHost, RPort)
 	if err != nil {
-		c.options.OnErrorFunc(tools.Error("", enums.InvalidAddress, nil))
+		c.options.OnErrorFunc(Error("", enums.InvalidAddress, nil))
 		return
 	}
 	_, err = c.conn.WriteToUDP(b, remoteAddr)
 	if err != nil {
-		c.options.OnErrorFunc(tools.Error(event, err.Error(), remoteAddr))
+		c.options.OnErrorFunc(Error(event, err.Error(), remoteAddr))
 		return
 	}
 	c.timeoutManager.Set(event, c.options.Duration, func() {
-		c.options.OnErrorFunc(tools.Error(event, enums.ReplyTimeout, remoteAddr))
+		c.options.OnErrorFunc(Error(event, enums.ReplyTimeout, remoteAddr))
 	})
 }
 
 func (c *UdpClient) Login(RHost string, RPort int, username string, userId int, alive bool) {
-	address, errAddr := tools.GenerateAddress(RHost, RPort)
+	address, errAddr := GenerateAddress(RHost, RPort)
 	if errAddr != nil {
-		c.options.OnErrorFunc(tools.Error(enums.EventLogin, enums.InvalidAddress, nil))
+		c.options.OnErrorFunc(Error(enums.EventLogin, enums.InvalidAddress, nil))
 	}
 	res, err := core_request_auth.LoginReq(username, userId, int(c.options.Duration.Milliseconds()))
 	if err != nil {
-		c.options.OnErrorFunc(tools.Error(enums.EventLogin, err.Error(), address))
+		c.options.OnErrorFunc(Error(enums.EventLogin, err.Error(), address))
 		return
 	}
 	fmt.Printf("login byte:%#v\n", res)
@@ -115,14 +115,14 @@ func (c *UdpClient) Login(RHost string, RPort int, username string, userId int, 
 }
 
 func (c *UdpClient) Ping(RHost string, RPort int, userId int) {
-	address, errAddr := tools.GenerateAddress(RHost, RPort)
+	address, errAddr := GenerateAddress(RHost, RPort)
 	if errAddr != nil {
-		c.options.OnErrorFunc(tools.Error(enums.EventPing, enums.InvalidAddress, nil))
+		c.options.OnErrorFunc(Error(enums.EventPing, enums.InvalidAddress, nil))
 		return
 	}
 	res, err := core_request_auth.SuperviseReq(userId)
 	if err != nil {
-		c.options.OnErrorFunc(tools.Error(enums.EventPing, err.Error(), address))
+		c.options.OnErrorFunc(Error(enums.EventPing, err.Error(), address))
 		return
 	}
 	c.Send(RHost, RPort, enums.EventPing, res)
@@ -130,4 +130,15 @@ func (c *UdpClient) Ping(RHost string, RPort int, userId int) {
 
 func (c *UdpClient) Logout(RHost string, RPort int, userId int) {
 
+}
+
+// GenerateAddress 组装UDP的IP
+func GenerateAddress(RHost string, RPort int) (*net.UDPAddr, error) {
+	// 校验: 远程IP
+	address := fmt.Sprintf("%s:%v", RHost, RPort)
+	rAddress, rErr := net.ResolveUDPAddr("udp", address)
+	if rErr != nil {
+		return nil, errors.New("不是有效的地址")
+	}
+	return rAddress, nil
 }

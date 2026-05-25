@@ -4,8 +4,7 @@ import (
 	"errors"
 
 	"github.com/renjietan/hytera-udp-protocol/core/request"
-	"github.com/renjietan/hytera-udp-protocol/tools"
-	"github.com/renjietan/hytera-udp-protocol/types"
+	"github.com/renjietan/hytera-udp-protocol/core/request/types"
 )
 
 // ReadFileInfoReq 读文件头信息请求
@@ -14,8 +13,7 @@ var ReadFileInfoReq = func(FileName string, userId int) ([]byte, error) {
 	if err != nil {
 		return nil, errors.New("Failed to insert into the TReadFileInfoReq template: " + err.Error())
 	}
-	recordField := tools.GetRecursiveField(tempByte, []types.UdpRequestByteCodeItem{})
-	_, res := tools.Struct2Bytes(tempByte, recordField, []byte{})
+	res := request.Struct2BytesCode(tempByte)
 	return res, nil
 }
 
@@ -25,7 +23,7 @@ var TReadFileInfoReq = func(FileName string, userId int) (types.UdpRequestBytesC
 		return nil, err
 	}
 	_FileName := []byte(FileName)
-	FileNameLen := tools.GetStringSize(FileName)
+	FileNameLen := request.GetStringSize(FileName)
 	res = append(res, types.UdpRequestByteCodeItem{
 		Name: "Payload",
 		Value: types.UdpRequestBytesCode{{

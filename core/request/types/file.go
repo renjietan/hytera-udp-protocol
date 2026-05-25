@@ -1,14 +1,5 @@
 package types
 
-type UdpRequestBytesCode []UdpRequestByteCodeItem
-
-type UdpRequestByteCodeItem struct {
-	Name  string `json:"name"`
-	Value any    `json:"value"`
-	Size  int    `json:"size"`
-	IsLe  bool   `json:"isLE"`
-}
-
 type UdpWriteFileInfoReq struct {
 	FileCRC   int    // 整个文件CRC校验位
 	FileName  string // 文件名（含相对路径）,例如：./FPGA/fh.bin

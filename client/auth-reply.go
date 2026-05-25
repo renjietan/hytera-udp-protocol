@@ -1,4 +1,4 @@
-package main
+package client
 
 import (
 	"net"
@@ -7,6 +7,7 @@ import (
 	"github.com/renjietan/hytera-udp-protocol/types/enums"
 )
 
+// AuthReply 回复
 func (c *UdpClient) AuthReply(data []byte, address *net.UDPAddr) {
 	_data := tools.NewSafeBytes(data)
 	UserID := _data.GetByte(7)
@@ -15,20 +16,20 @@ func (c *UdpClient) AuthReply(data []byte, address *net.UDPAddr) {
 		c.timeoutManager.StopAll()
 		c.Ping(address.IP.String(), address.Port, int(UserID))
 		c.timeoutManager.Set(enums.EventPing, c.options.Duration, func() {
-			c.options.OnErrorFunc(tools.Error(enums.EventPing, enums.ReplyTimeout, address))
+			c.options.OnErrorFunc(Error(enums.EventPing, enums.ReplyTimeout, address))
 		})
 	} else if OptCode == 0x83 { // 131-心跳
 		status := _data.GetByte(10)
 		if status == 0x01 {
 			c.timeoutManager.StopAll()
-			c.options.OnErrorFunc(tools.Error(enums.EventPing, enums.PingDisconnect, address))
+			c.options.OnErrorFunc(Error(enums.EventPing, enums.PingDisconnect, address))
 			return
 		}
 		c.timeoutManager.StopByName(enums.EventPing)
 		c.timeoutManager.Set(enums.EventPing, c.options.Duration, func() {
 			c.Ping(address.IP.String(), address.Port, int(UserID))
 			c.timeoutManager.Set(enums.EventPing, c.options.Duration, func() {
-				c.options.OnErrorFunc(tools.Error(enums.EventPing, enums.ReplyTimeout, address))
+				c.options.OnErrorFunc(Error(enums.EventPing, enums.ReplyTimeout, address))
 			})
 		})
 	}

@@ -4,8 +4,7 @@ import (
 	"errors"
 
 	"github.com/renjietan/hytera-udp-protocol/core/request"
-	"github.com/renjietan/hytera-udp-protocol/tools"
-	"github.com/renjietan/hytera-udp-protocol/types"
+	"github.com/renjietan/hytera-udp-protocol/core/request/types"
 )
 
 // SharedFileSub 共享文件订阅
@@ -14,8 +13,7 @@ var SharedFileSub = func(FileName string, userId int) ([]byte, error) {
 	if err != nil {
 		return nil, errors.New("Failed to insert into the TSharedFileSub template: " + err.Error())
 	}
-	recordField := tools.GetRecursiveField(tempByte, []types.UdpRequestByteCodeItem{})
-	_, res := tools.Struct2Bytes(tempByte, recordField, []byte{})
+	res := request.Struct2BytesCode(tempByte)
 	return res, nil
 }
 
@@ -24,7 +22,7 @@ var TSharedFileSub = func(FileName string, userId int) (types.UdpRequestBytesCod
 	if err != nil {
 		return nil, err
 	}
-	FileNameLen := tools.GetStringSize(FileName)
+	FileNameLen := request.GetStringSize(FileName)
 	FileNameByte := []byte(FileName)
 	res = append(res, types.UdpRequestByteCodeItem{
 		Name: "Payload",

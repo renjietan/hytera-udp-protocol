@@ -1,4 +1,4 @@
-package tools
+package request
 
 import (
 	"encoding/binary"
@@ -7,8 +7,14 @@ import (
 	"strings"
 	"unicode/utf16"
 
-	"github.com/renjietan/hytera-udp-protocol/types"
+	"github.com/renjietan/hytera-udp-protocol/core/request/types"
 )
+
+func Struct2BytesCode(params types.UdpRequestBytesCode) []byte {
+	refsField := GetRecursiveField(params, []types.UdpRequestByteCodeItem{})
+	_, res := Struct2Bytes(params, refsField, []byte{})
+	return res
+}
 
 // GetRecursiveField 返回：针对需要统计长度的字段 进行计数，例如 [{ Name: "Length", Value: 10, Size: 2  }]
 // params{t} 用于记录数据中，哪些数据是需要统计长度的，统计出长度后，全部放入 t 中
@@ -162,6 +168,12 @@ func EncodeString(s string, encoding string) ([]byte, error) {
 	}
 }
 
+// GetStringSize 获取字符串字的个数
+func GetStringSize(str string) int {
+	return len([]rune(str))
+}
+
+// ChunkByBytes 分组切分Bytes
 func ChunkByBytes(data []byte, size int) [][]byte {
 	length := len(data)
 	var res [][]byte

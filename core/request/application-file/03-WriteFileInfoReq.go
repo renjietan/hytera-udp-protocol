@@ -4,19 +4,16 @@ import (
 	"errors"
 
 	"github.com/renjietan/hytera-udp-protocol/core/request"
-	"github.com/renjietan/hytera-udp-protocol/tools"
-	"github.com/renjietan/hytera-udp-protocol/types"
+	"github.com/renjietan/hytera-udp-protocol/core/request/types"
 )
 
 // WriteFileInfoReq 写文件头信息请求
 var WriteFileInfoReq = func(params types.UdpWriteFileInfoReq, userId int) ([]byte, error) {
-
 	tempByte, err := TWriteFileInfoReq(params, userId)
 	if err != nil {
 		return nil, errors.New("Failed to insert into the TWriteFileInfoReq template: " + err.Error())
 	}
-	recordField := tools.GetRecursiveField(tempByte, []types.UdpRequestByteCodeItem{})
-	_, res := tools.Struct2Bytes(tempByte, recordField, []byte{})
+	res := request.Struct2BytesCode(tempByte)
 	return res, nil
 }
 
@@ -28,9 +25,9 @@ var TWriteFileInfoReq = func(params types.UdpWriteFileInfoReq, userId int) (type
 	FileBody := params.FileBody   // 文件内容（字节）
 	ChunkSize := params.ChunkSize // 每包字节长度
 	FileName := params.FileName   // 文件名（含相对路径）,例如：./FPGA/fh.bin
-	FileNameLen := tools.GetStringSize(FileName)
+	FileNameLen := request.GetStringSize(FileName)
 	FileCRC := params.FileCRC
-	Chunks := tools.ChunkByBytes(FileBody, ChunkSize) // 分包，返回数组
+	Chunks := request.ChunkByBytes(FileBody, ChunkSize) // 分包，返回数组
 	res = append(res, types.UdpRequestByteCodeItem{
 		Name: "Payload",
 		Value: types.UdpRequestBytesCode{{
