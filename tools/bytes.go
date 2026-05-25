@@ -13,12 +13,12 @@ import (
 // GetRecursiveField 返回：针对需要统计长度的字段 进行计数，例如 [{ Name: "Length", Value: 10, Size: 2  }]
 // params{t} 用于记录数据中，哪些数据是需要统计长度的，统计出长度后，全部放入 t 中
 // params{params} 全量数据
-func GetRecursiveField(params types.UdpRequest, t types.UdpRequest) types.UdpRequest {
+func GetRecursiveField(params types.UdpRequestBytesCode, t types.UdpRequestBytesCode) types.UdpRequestBytesCode {
 	for _, v := range params {
 		size := v.Size
 		name := v.Name
 		switch value := v.Value.(type) {
-		case types.UdpRequest:
+		case types.UdpRequestBytesCode:
 			//fmt.Println("递归：", name)
 			t = GetRecursiveField(value, t)
 		case int, []byte:
@@ -31,7 +31,7 @@ func GetRecursiveField(params types.UdpRequest, t types.UdpRequest) types.UdpReq
 				//fmt.Println("计算1", t, name)
 			}
 		case nil:
-			t = append(t, types.Item{
+			t = append(t, types.UdpRequestByteCodeItem{
 				Name:  name,
 				Size:  size,
 				Value: 0x00,
@@ -49,11 +49,11 @@ func GetRecursiveField(params types.UdpRequest, t types.UdpRequest) types.UdpReq
 }
 
 // Struct2Bytes  针对需要计算长度的字段，返回最终结果:
-func Struct2Bytes(params types.UdpRequest, t []types.Item, res []byte) (types.UdpRequest, []byte) {
+func Struct2Bytes(params types.UdpRequestBytesCode, t []types.UdpRequestByteCodeItem, res []byte) (types.UdpRequestBytesCode, []byte) {
 	for index, v := range params {
 		switch v.Value.(type) {
-		case types.UdpRequest:
-			t, res = Struct2Bytes(params[index].Value.(types.UdpRequest), t, res)
+		case types.UdpRequestBytesCode:
+			t, res = Struct2Bytes(params[index].Value.(types.UdpRequestBytesCode), t, res)
 		default:
 			for i := 0; i < len(t); i++ {
 				if t[i].Name == v.Name {

@@ -3,6 +3,20 @@
   <component name="GoORMHelperCache">
     <option name="schemaMapping">
       <map>
+        <entry key="AdapterInfoAck">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/types/reponse/auth/auth.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="AdapterInfoItem">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/types/reponse/auth/auth.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="App">
           <value>
             <set>
@@ -13,7 +27,120 @@
         <entry key="ApplicationInfo">
           <value>
             <set>
+              <option value="file://$PROJECT_DIR$/core/application/application.go" />
               <option value="file://$PROJECT_DIR$/types/request.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="AuthResponseKickOutAck">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/types/reponse/auth/auth.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="AuthResponseKickOutInfoAck">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/types/reponse/auth/auth.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="AuthResponseKickOutInfoNty">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/types/reponse/auth/auth.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="AuthResponseKickOutReqAck">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/types/reponse/auth/auth.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="AuthResponseKickOutSubAck">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/types/reponse/auth/auth.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="AuthResponseLogin">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/types/reponse/auth/auth.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="AuthResponseLogin01">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/types/reponse/auth/auth.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="AuthResponseLogin03">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/types/reponse/auth/auth.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="AuthResponseLoginAck">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/types/reponse/auth/auth.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="AuthResponseLoginInfoAck">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/types/reponse/auth/auth.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="AuthResponseLogout">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/types/reponse/auth/auth.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="AuthResponseLogoutAck">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/types/reponse/auth/auth.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="AuthResponsePassword">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/types/reponse/auth/auth.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="AuthResponsePasswordAck">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/types/reponse/auth/auth.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="AuthResponsePing">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/types/reponse/auth/auth.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="AuthResponsePingAck">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/types/reponse/auth/auth.go" />
             </set>
           </value>
         </entry>
@@ -24,6 +151,20 @@
             </set>
           </value>
         </entry>
+        <entry key="GetAdapterInfoAck">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/types/reponse/auth/auth.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="GetLoginInfoAck">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/types/reponse/auth/auth.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="Item">
           <value>
             <set>
@@ -31,10 +172,129 @@
             </set>
           </value>
         </entry>
+        <entry key="KickOut">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/types/reponse/auth/auth.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="KickOutAck">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/types/reponse/auth/auth.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="KickOutInfoAck">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/types/reponse/auth/auth.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="KickOutInfoNty">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/types/reponse/auth/auth.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="KickOutReqAck">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/types/reponse/auth/auth.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="KickOutSubAck">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/types/reponse/auth/auth.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Login">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/../../../test/WithTest/main.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="LoginAck">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/types/reponse/auth/auth.go" />
+              <option value="file://$PROJECT_DIR$/../../../test/WithTest/test1/main.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="LoginInfoAck">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/types/reponse/auth/auth.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="LogoutAck">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/types/reponse/auth/auth.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="OptData">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/../../../test/WithTest/main.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="OptDataParams">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/../../../test/WithTest/main.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="PasswordAck">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/types/reponse/auth/auth.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Payload">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/types/reponse/auth/auth.go" />
+              <option value="file://$PROJECT_DIR$/types/reponse/response.go" />
+              <option value="file://$PROJECT_DIR$/types/response.go" />
+              <option value="file://$PROJECT_DIR$/../../../test/WithTest/main.go" />
+              <option value="file://$PROJECT_DIR$/../../../test/WithTest/test1/main.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="PingAck">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/types/reponse/auth/auth.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="Response">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/types/response.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="SafeBytes">
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/tools/SafeBytes.go" />
+              <option value="file://$PROJECT_DIR$/../../../test/WithTest/main.go" />
+              <option value="file://$PROJECT_DIR$/../../../test/WithTest/tools/SafeBytes.go" />
             </set>
           </value>
         </entry>
@@ -69,7 +329,16 @@
         <entry key="UdpBaseResponse">
           <value>
             <set>
+              <option value="file://$PROJECT_DIR$/types/reponse/response.go" />
               <option value="file://$PROJECT_DIR$/types/response.go" />
+              <option value="file://$PROJECT_DIR$/../../../test/WithTest/main.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UdpByteCodeItem">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/types/request.go" />
             </set>
           </value>
         </entry>
@@ -80,6 +349,13 @@
             </set>
           </value>
         </entry>
+        <entry key="UdpFSResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/types/response.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="UdpFileResponse">
           <value>
             <set>
@@ -87,10 +363,41 @@
             </set>
           </value>
         </entry>
+        <entry key="UdpRequestByteCodeItem">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/types/request.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UdpResponse">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/types/response.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UdpResponseByteCodeItem">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/types/reponse/response.go" />
+              <option value="file://$PROJECT_DIR$/../../../test/WithTest/test1/main.go" />
+            </set>
+          </value>
+        </entry>
+        <entry key="UdpResponseBytesCode">
+          <value>
+            <set>
+              <option value="file://$PROJECT_DIR$/types/reponse/response.go" />
+              <option value="file://$PROJECT_DIR$/../../../test/WithTest/test1/main.go" />
+            </set>
+          </value>
+        </entry>
         <entry key="UdpWriteFileDataReq">
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/types/request.go" />
+              <option value="file://$PROJECT_DIR$/types/udpWriteFile.go" />
             </set>
           </value>
         </entry>
@@ -98,6 +405,7 @@
           <value>
             <set>
               <option value="file://$PROJECT_DIR$/types/request.go" />
+              <option value="file://$PROJECT_DIR$/types/udpWriteFile.go" />
             </set>
           </value>
         </entry>
@@ -283,7 +591,7 @@
         <entry key="file://$PROJECT_DIR$/core/base.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1779182065260" />
+              <option name="lastModified" value="1779549710886" />
             </ScannedPath>
           </value>
         </entry>
@@ -294,17 +602,199 @@
             </ScannedPath>
           </value>
         </entry>
+        <entry key="file://$PROJECT_DIR$/core/request/application-extended/01-RetrieveFuncPointReq.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779609730565" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/request/application-extended/02-RetrieveAtomOptReq.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779609730510" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/request/application-extended/03-RunFuncPointReq.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779609730531" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/request/application-extended/04-ListFuncPointsReq.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779609730451" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/request/application-extended/05-ReadFuncPointsListReq.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779609730241" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/request/application-extended/06-ListAtomOptsReq.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779609730342" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/request/application-extended/07-EnableResendAFSReq.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779609730638" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/request/application-file/01-ReadFileInfoReq.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779609730614" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/request/application-file/02-ReadFileDataReq.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779609730948" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/request/application-file/03-WriteFileInfoReq.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779609730858" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/request/application-file/04-WriteFileDataReq.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779609730902" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/request/application-file/05-SharedFileSub.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779609730837" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/request/application/application.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779609730407" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/request/auth/01-05-LoginReq.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779609730663" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/request/auth/02-LogoutReq.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779609730700" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/request/auth/03-SuperviseReq.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779609730749" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/request/auth/04-PasswordReq.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779609730188" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/request/auth/06-KickoutSub.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779609730721" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/request/auth/07-KickoutReq.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779609730588" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/request/auth/09-LoginInfoReq.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779609730804" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/request/auth/10-AdapterInfoReq.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779609730266" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/request/base.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779609730145" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/ressponse/auth/01-05-LoginReq.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779610729804" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/ressponse/auth/auth.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779635372750" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/ressponse/base.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779630264379" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/core/ressponse/reponse.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779636792863" />
+            </ScannedPath>
+          </value>
+        </entry>
         <entry key="file://$PROJECT_DIR$/main.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1779181111066" />
+              <option name="lastModified" value="1779636970201" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/tools/SafeBytes.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1779159618589" />
+              <option name="lastModified" value="1779566451645" />
               <option name="schema">
                 <list>
                   <option value="SafeBytes" />
@@ -316,14 +806,14 @@
         <entry key="file://$PROJECT_DIR$/tools/bytes.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1779412051030" />
+              <option name="lastModified" value="1779609730292" />
             </ScannedPath>
           </value>
         </entry>
         <entry key="file://$PROJECT_DIR$/tools/common.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1779412045121" />
+              <option name="lastModified" value="1779602743515" />
             </ScannedPath>
           </value>
         </entry>
@@ -337,7 +827,14 @@
         <entry key="file://$PROJECT_DIR$/tools/reponse.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1779415122995" />
+              <option name="lastModified" value="1779548562338" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/tools/string.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779526990273" />
             </ScannedPath>
           </value>
         </entry>
@@ -408,13 +905,77 @@
             </ScannedPath>
           </value>
         </entry>
+        <entry key="file://$PROJECT_DIR$/types/reponse.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779157489558" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/types/reponse/auth.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779612982106" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/types/reponse/auth/03-login.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779610969888" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/types/reponse/auth/auth.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779635376728" />
+              <option name="schema">
+                <list>
+                  <option value="LoginAck" />
+                  <option value="LogoutAck" />
+                  <option value="PingAck" />
+                  <option value="PasswordAck" />
+                  <option value="KickOutSubAck" />
+                  <option value="KickOutReqAck" />
+                  <option value="KickOutInfoNty" />
+                  <option value="KickOutInfoAck" />
+                  <option value="LoginInfoAck" />
+                  <option value="AdapterInfoAck" />
+                  <option value="AdapterInfoItem" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/types/reponse/auth/login.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779610822357" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/types/reponse/response.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779635425398" />
+              <option name="schema">
+                <list>
+                  <option value="UdpResponseBytesCode" />
+                  <option value="Payload" />
+                  <option value="UdpResponseByteCodeItem" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
         <entry key="file://$PROJECT_DIR$/types/request.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1779412536552" />
+              <option name="lastModified" value="1779609730368" />
               <option name="schema">
                 <list>
-                  <option value="Item" />
+                  <option value="UdpRequestByteCodeItem" />
                   <option value="UdpWriteFileInfoReq" />
                   <option value="UdpWriteFileDataReq" />
                   <option value="ApplicationInfo" />
@@ -426,14 +987,31 @@
         <entry key="file://$PROJECT_DIR$/types/response.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1779432642665" />
+              <option name="lastModified" value="1779609868706" />
               <option name="schema">
                 <list>
                   <option value="UdpAuthResponse" />
-                  <option value="UdpApplicationResponse" />
-                  <option value="UdpApplicationExtendedResponse" />
-                  <option value="UdpFileResponse" />
                   <option value="UdpBaseResponse" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/types/string.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779526969283" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/types/udpWriteFile.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779349825071" />
+              <option name="schema">
+                <list>
+                  <option value="UdpWriteFileInfoReq" />
+                  <option value="UdpWriteFileDataReq" />
                 </list>
               </option>
             </ScannedPath>
@@ -442,7 +1020,7 @@
         <entry key="file://$PROJECT_DIR$/udp-client.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1779412804610" />
+              <option name="lastModified" value="1779526336056" />
               <option name="schema">
                 <list>
                   <option value="UdpClient" />
@@ -451,15 +1029,108 @@
             </ScannedPath>
           </value>
         </entry>
+        <entry key="file://$PROJECT_DIR$/../test/main.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779415277355" />
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/../../../test/WithTest/main.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779633268583" />
+              <option name="schema">
+                <list>
+                  <option value="UdpBaseResponse" />
+                  <option value="Payload" />
+                  <option value="OptData" />
+                  <option value="Login" />
+                  <option value="SafeBytes" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/../../../test/WithTest/test1/main.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779637111183" />
+              <option name="schema">
+                <list>
+                  <option value="Payload" />
+                  <option value="UdpResponseBytesCode" />
+                  <option value="UdpResponseByteCodeItem" />
+                  <option value="LoginAck" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/../../../test/WithTest/tools/SafeBytes.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779636662543" />
+              <option name="schema">
+                <list>
+                  <option value="SafeBytes" />
+                </list>
+              </option>
+            </ScannedPath>
+          </value>
+        </entry>
+        <entry key="file://$PROJECT_DIR$/../../../test/WithTest/tools/tern.go">
+          <value>
+            <ScannedPath>
+              <option name="lastModified" value="1779557515807" />
+            </ScannedPath>
+          </value>
+        </entry>
       </map>
     </option>
     <option name="tableStructMapping">
       <map>
+        <entry key="adapter_info_ack" value="AdapterInfoAck" />
+        <entry key="adapter_info_item" value="AdapterInfoItem" />
         <entry key="app" value="App" />
         <entry key="application_info" value="ApplicationInfo" />
+        <entry key="auth_response_kick_out_ack" value="AuthResponseKickOutAck" />
+        <entry key="auth_response_kick_out_info_ack" value="AuthResponseKickOutInfoAck" />
+        <entry key="auth_response_kick_out_info_nty" value="AuthResponseKickOutInfoNty" />
+        <entry key="auth_response_kick_out_req_ack" value="AuthResponseKickOutReqAck" />
+        <entry key="auth_response_kick_out_sub_ack" value="AuthResponseKickOutSubAck" />
+        <entry key="auth_response_login" value="AuthResponseLogin" />
+        <entry key="auth_response_login01" value="AuthResponseLogin01" />
+        <entry key="auth_response_login03" value="AuthResponseLogin03" />
+        <entry key="auth_response_login_ack" value="AuthResponseLoginAck" />
+        <entry key="auth_response_login_info_ack" value="AuthResponseLoginInfoAck" />
+        <entry key="auth_response_logout" value="AuthResponseLogout" />
+        <entry key="auth_response_logout_ack" value="AuthResponseLogoutAck" />
+        <entry key="auth_response_password" value="AuthResponsePassword" />
+        <entry key="auth_response_password_ack" value="AuthResponsePasswordAck" />
+        <entry key="auth_response_ping" value="AuthResponsePing" />
+        <entry key="auth_response_ping_ack" value="AuthResponsePingAck" />
         <entry key="envelope" value="Envelope" />
+        <entry key="get_adapter_info_ack" value="GetAdapterInfoAck" />
+        <entry key="get_login_info_ack" value="GetLoginInfoAck" />
         <entry key="item" value="Item" />
+        <entry key="kick_out" value="KickOut" />
+        <entry key="kick_out_ack" value="KickOutAck" />
+        <entry key="kick_out_info_ack" value="KickOutInfoAck" />
+        <entry key="kick_out_info_nty" value="KickOutInfoNty" />
+        <entry key="kick_out_req_ack" value="KickOutReqAck" />
+        <entry key="kick_out_sub_ack" value="KickOutSubAck" />
+        <entry key="login" value="Login" />
+        <entry key="login_ack" value="LoginAck" />
+        <entry key="login_info_ack" value="LoginInfoAck" />
+        <entry key="logout_ack" value="LogoutAck" />
+        <entry key="opt_data" value="OptData" />
+        <entry key="opt_data_params" value="OptDataParams" />
+        <entry key="password_ack" value="PasswordAck" />
+        <entry key="payload" value="Payload" />
+        <entry key="ping_ack" value="PingAck" />
         <entry key="reset_options" value="resetOptions" />
+        <entry key="response" value="Response" />
         <entry key="safe_bytes" value="SafeBytes" />
         <entry key="timeout_manager" value="TimeoutManager" />
         <entry key="timer_command" value="timerCommand" />
@@ -468,12 +1139,18 @@
         <entry key="udp_application_response" value="UdpApplicationResponse" />
         <entry key="udp_auth_response" value="UdpAuthResponse" />
         <entry key="udp_base_response" value="UdpBaseResponse" />
+        <entry key="udp_byte_code_item" value="UdpByteCodeItem" />
         <entry key="udp_client" value="UdpClient" />
         <entry key="udp_file_response" value="UdpFileResponse" />
+        <entry key="udp_fs_response" value="UdpFSResponse" />
+        <entry key="udp_request_byte_code_item" value="UdpRequestByteCodeItem" />
+        <entry key="udp_response" value="UdpResponse" />
+        <entry key="udp_response_byte_code_item" value="UdpResponseByteCodeItem" />
+        <entry key="udp_response_bytes_code" value="UdpResponseBytesCode" />
         <entry key="udp_write_file_data_req" value="UdpWriteFileDataReq" />
         <entry key="udp_write_file_info_req" value="UdpWriteFileInfoReq" />
       </map>
     </option>
-    <option name="lastTimeChecked" value="1779671663646" />
+    <option name="lastTimeChecked" value="1779412167751" />
   </component>
 </project>

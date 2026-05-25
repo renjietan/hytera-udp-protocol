@@ -29,7 +29,6 @@ func main() {
 		return
 	}
 	client.Login("8.135.10.183", 55022, "admin", 11, true)
-
 	quit := make(chan os.Signal, 1)
 	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
 	<-quit
