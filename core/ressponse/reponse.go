@@ -89,15 +89,17 @@ func ByteCode2Stuct(b []byte, v interface{}, path string, bindPaths map[string]t
 					} else if originalBind.ValueType == types.UdpResponseBindStructInt {
 						pathSlice := strings.Split(originalBind.Path, ".")
 						ext := pathSlice[len(pathSlice)-1]
+						// UserName 是 UTF16BE
 						if ext == "UserName" {
 							originalBind.Value = int(BytesToUintBE(forwardByte.Data)) * 2
 						} else {
 							originalBind.Value = int(BytesToUintBE(forwardByte.Data))
 						}
+					} else if originalBind.ValueType == types.UdpResponseBindStructRange {
+
 					}
 					bindPaths[originalBind.Path] = originalBind
 				}
-				fmt.Println(currentPath, "===================", bindPaths)
 				b = backendByte.Data
 			}
 			fmt.Println(currentPath)
