@@ -22,6 +22,25 @@ type UdpResponseByteCodeItem struct {
 	Bind  UdpResponseBindStruct
 }
 
+type AdapterInfoItem struct {
+	// 设备适配器所属通道号, 0 代表不区分；从1开始，表示通道一、通道二等等。
+	ChannelNo UdpResponseByteCodeItem // 1 Byte
+	// 设备适配器类型：
+	// 0x00    无效
+	// 0x01    以太网
+	// 0x02    串口
+	// 0x03    被覆线
+	AdapterType UdpResponseByteCodeItem // 1 Byte
+	// 设备适配器IPv4地址。AdapterType为0x01时有效
+	Ipv4Addr UdpResponseByteCodeItem // 4 Byte
+	// 设备适配器IPv4掩码。AdapterType为0x01时有效
+	Ipv4Mask UdpResponseByteCodeItem // 4 Byte
+	// 设备适配器名称字的个数，最大255个字
+	Size UdpResponseByteCodeItem // 1 Byte
+	// 设备适配器名称: UTF-16BE编码
+	AdapterName UdpResponseByteCodeItem // n Byte
+}
+
 type UdpResponseBindValueType string
 
 const (
@@ -33,7 +52,8 @@ const (
 type UdpResponseBindFileName string
 
 const (
-	UdpResponseBindStructSize UdpResponseBindFileName = "Size"
+	UdpResponseBindStructSize  UdpResponseBindFileName = "Size"
+	UdpResponseBindStructValue UdpResponseBindFileName = "Value"
 )
 
 type UdpResponseBindStruct struct {

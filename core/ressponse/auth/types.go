@@ -260,6 +260,15 @@ func NewLoginInfoAck() types.Payload {
 		Size: types.UdpResponseByteCodeItem{
 			Value: []byte{},
 			Size:  1,
+			Bind: types.UdpResponseBindStruct{
+				Path:      "Payload.OptData.AdapterName",
+				FieldName: types.UdpResponseBindStructSize,
+				//Callback: func(params ...any) {
+				//	fmt.Println("NewKickOutInfoNty Func===============", params)
+				//},
+				Value:     nil,
+				ValueType: types.UdpResponseBindStructInt,
+			}, // 下面 UserName 字段
 		},
 		AdapterName: types.UdpResponseByteCodeItem{
 			Value: []byte{},
@@ -277,7 +286,9 @@ type AdapterInfoAck struct {
 	// 设备适配器链表元素数量
 	ListCount types.UdpResponseByteCodeItem // 2 Bytes
 	// 适配器列表
-	Channels []AdapterInfoItem
+	Channels []types.AdapterInfoItem
+	TestSize types.UdpResponseByteCodeItem
+	TestName types.UdpResponseByteCodeItem
 }
 
 func NewAdapterInfoAck() types.Payload {
@@ -289,29 +300,30 @@ func NewAdapterInfoAck() types.Payload {
 		// 设备适配器链表元素数量
 		ListCount: types.UdpResponseByteCodeItem{
 			Value: []byte{},
-			Size:  1,
+			Size:  2,
+			Bind: types.UdpResponseBindStruct{
+				Path:      "Payload.OptData.Channels",
+				FieldName: types.UdpResponseBindStructValue,
+				Value:     nil,
+				ValueType: types.UdpResponseBindStructRange,
+			},
 		},
 		// 根据 ListCount 计算
-		Channels: make([]AdapterInfoItem, 0),
+		Channels: []types.AdapterInfoItem{},
+		TestSize: types.UdpResponseByteCodeItem{
+			Value: []byte{},
+			Size:  1,
+			Bind: types.UdpResponseBindStruct{
+				Path:      "Payload.OptData.TestSize",
+				FieldName: types.UdpResponseBindStructSize,
+				Value:     nil,
+				ValueType: types.UdpResponseBindStructInt,
+			},
+		},
+		TestName: types.UdpResponseByteCodeItem{
+			Value: []byte{},
+			Size:  0,
+		},
 	}
 	return response.TempPayload(res)
-}
-
-type AdapterInfoItem struct {
-	// 设备适配器所属通道号, 0 代表不区分；从1开始，表示通道一、通道二等等。
-	ChannelNo types.UdpResponseByteCodeItem // 1 Byte
-	// 设备适配器类型：
-	// 0x00    无效
-	// 0x01    以太网
-	// 0x02    串口
-	// 0x03    被覆线
-	AdapterType types.UdpResponseByteCodeItem // 1 Byte
-	// 设备适配器IPv4地址。AdapterType为0x01时有效
-	Ipv4Addr types.UdpResponseByteCodeItem // 4 Byte
-	// 设备适配器IPv4掩码。AdapterType为0x01时有效
-	Ipv4Mask types.UdpResponseByteCodeItem // 4 Byte
-	// 设备适配器名称字的个数，最大255个字
-	Size types.UdpResponseByteCodeItem // 1 Byte
-	// 设备适配器名称: UTF-16BE编码
-	AdapterName types.UdpResponseByteCodeItem // n Byte
 }

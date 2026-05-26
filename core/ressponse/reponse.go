@@ -1,8 +1,6 @@
 package response
 
 import (
-	"encoding/binary"
-	"fmt"
 	"reflect"
 	"strings"
 
@@ -36,7 +34,13 @@ import (
 // params[b] 码流
 // params[v] 码流转换后的结构体指针，例如 lTemp := core_response_auth.LoginRes()
 // params[path] 当前循环的路径，例如 Payload.OptData.Status
-// params[bindPaths] 例如: 递归到 Payload.OptData.UserName 时，若 bindPaths 中存在该路径，则取出对应数据赋给 UserName 的 Size 字段
+// params[bindPaths.Path] 关联字段的路径，例如 Payload.OptData.UserName
+// params[bindPaths.FieldName] 给字段的哪个属性赋值  例如 Size | Value
+// params[bindPaths.Value] 将 Value 值 赋值给 Payload.OptData.UserName
+// params[bindPaths.ValueType] Value 值类型，如果是List，则需要生成列表， int 或 string  则需要转换
+// 例如: 递归时，
+// 1、当 bindPaths 存在 [currentPath] 的键名时，则将 [bindPaths.Value] 的值，赋值给当前字段的 [bindPaths FieldName] 属性
+// 2、当 参数 v 的 元素中存在 [bind] 字段时，根据 [bind.ValueType] 来执行接下来的操作，根据 [bind.FieldName] 来针对 某个字段进行赋值，一般是 Size 或 Value
 func ByteCode2Stuct(b []byte, v interface{}, path string, bindPaths map[string]types.UdpResponseBindStruct) {
 	val := reflect.ValueOf(v)
 	if val.Kind() == reflect.Ptr {
@@ -51,7 +55,19 @@ func ByteCode2Stuct(b []byte, v interface{}, path string, bindPaths map[string]t
 		field := val.Field(i)
 		fieldType := typ.Field(i)
 		currentPath := path + fieldType.Name
-		if fieldType.Type == reflect.TypeOf(types.UdpResponseByteCodeItem{}) {
+
+		value := bindPaths[currentPath]
+		Path := value.Path
+		ValueType := value.ValueType
+		FieldName := value.FieldName
+		Value := value.Value
+		if fieldType.Type == reflect.TypeOf([]types.AdapterInfoItem{}) {
+			m := reflect.MakeSlice(reflect.TypeOf([]types.AdapterInfoItem{}), 0, 0)
+			for _, e := range Value.([]types.AdapterInfoItem) {
+				m = reflect.Append(m, reflect.ValueOf(e))
+			}
+			field.Set(m)
+		} else if fieldType.Type == reflect.TypeOf(types.UdpResponseByteCodeItem{}) {
 			valueField := field.FieldByName("Value")
 			sizeField := field.FieldByName("Size")
 			bindField := field.FieldByName("Bind")
@@ -60,17 +76,10 @@ func ByteCode2Stuct(b []byte, v interface{}, path string, bindPaths map[string]t
 
 			if valueField.IsValid() && valueField.CanSet() {
 				s := 0
-				if sizeField.Int() == 0 {
-					s = len(b)
-					sizeField.Set(reflect.ValueOf(s))
-				} else {
+				if sizeField.Int() != 0 {
 					s = int(sizeField.Int())
 				}
 				// 循环到 bind 的字段时，重新赋值
-				value := bindPaths[currentPath]
-				Path := value.Path
-				ValueType := value.ValueType
-				FieldName := value.FieldName
 				if Path != "" {
 					if ValueType == types.UdpResponseBindStructInt {
 						s = value.Value.(int)
@@ -82,27 +91,34 @@ func ByteCode2Stuct(b []byte, v interface{}, path string, bindPaths map[string]t
 				forwardByte := tools.NewSafeBytes(b).Slice(s, enums.Forward)
 				backendByte := tools.NewSafeBytes(b).Slice(s, enums.Backward)
 				valueField.Set(reflect.ValueOf(forwardByte.Data))
+				b = backendByte.Data
 				// 存在 bind  字段时，存下来
 				if originalBind.Path != "" {
 					if originalBind.ValueType == types.UdpResponseBindStructString {
 						originalBind.Value = string(forwardByte.Data)
 					} else if originalBind.ValueType == types.UdpResponseBindStructInt {
-						pathSlice := strings.Split(originalBind.Path, ".")
-						ext := pathSlice[len(pathSlice)-1]
+						ext := GetPathExt(originalBind.Path, ".")
 						// UserName 是 UTF16BE
 						if ext == "UserName" {
-							originalBind.Value = int(BytesToUintBE(forwardByte.Data)) * 2
+							originalBind.Value = int(tools.BytesToUintBE(forwardByte.Data)) * 2
 						} else {
-							originalBind.Value = int(BytesToUintBE(forwardByte.Data))
+							originalBind.Value = int(tools.BytesToUintBE(forwardByte.Data))
 						}
 					} else if originalBind.ValueType == types.UdpResponseBindStructRange {
+						ext := GetPathExt(originalBind.Path, ".")
+						itemLen := int(tools.BytesToUintBE(forwardByte.Data))
 
+						//vv := tools.BytesToUintBE(valueField)
+						if ext == "Channels" {
+							originalValue, bt := NewAdapterInfoItems(itemLen, b)
+							b = bt
+							originalBind.Value = originalValue
+						}
 					}
 					bindPaths[originalBind.Path] = originalBind
 				}
-				b = backendByte.Data
+
 			}
-			fmt.Println(currentPath)
 			continue
 		}
 
@@ -129,53 +145,54 @@ func ByteCode2Stuct(b []byte, v interface{}, path string, bindPaths map[string]t
 	}
 }
 
-func BytesToUintBE(b []byte) uint64 {
-	switch len(b) {
-	case 1:
-		return uint64(b[0])
-	case 2:
-		return uint64(binary.BigEndian.Uint16(b))
-	case 4:
-		return uint64(binary.BigEndian.Uint32(b))
-	case 8:
-		return binary.BigEndian.Uint64(b)
-	default:
-		return 0
-	}
+func GetPathExt(path string, splitStr string) string {
+	pathSlice := strings.Split(path, splitStr)
+	ext := pathSlice[len(pathSlice)-1]
+	return ext
 }
 
-//func ByteCode2Stuct(b []byte, v reflect.Value) {
-//	if v.Kind() == reflect.Ptr {
-//		v = v.Elem()
-//	}
-//	if v.Kind() != reflect.Struct {
-//		return
-//	}
-//	t := v.Type()
-//	for i := 0; i < v.NumField(); i++ {
-//		field := v.Field(i)
-//		fieldType := t.Field(i)
-//		currentPath := fieldType.Name
-//
-//		if field.Type() == reflect.TypeOf(types.UdpResponseByteCodeItem{}) {
-//			valueField := field.FieldByName("Value")
-//			sizeField := field.FieldByName("Size")
-//			if valueField.IsValid() && valueField.CanSet() {
-//				s := 0
-//				if sizeField.Int() == 0 {
-//					s = len(b)
-//					sizeField.Set(reflect.ValueOf(s))
-//				} else {
-//					s = int(sizeField.Int())
-//				}
-//				forwardByte := tools.NewSafeBytes(b).Slice(s, enums.Forward)
-//				backendByte := tools.NewSafeBytes(b).Slice(s, enums.Backward)
-//				valueField.Set(reflect.ValueOf(forwardByte))
-//				b = backendByte.Data
-//				fmt.Printf("%s.Value: %#v\n", currentPath, b)
-//			}
-//		} else if field.Elem().Kind() == reflect.Struct {
-//			ByteCode2Stuct(b, field)
-//		}
-//	}
-//}
+func NewAdapterInfoItems(itemLen int, b []byte) ([]types.AdapterInfoItem, []byte) {
+	var m []types.AdapterInfoItem
+	for _ = range itemLen {
+		ChannelNo := types.UdpResponseByteCodeItem{
+			Value: b[:1],
+			Size:  1,
+		}
+		b = b[1:]
+		AdapterType := types.UdpResponseByteCodeItem{
+			Value: b[:1],
+			Size:  1,
+		}
+		b = b[1:]
+		Ipv4Addr := types.UdpResponseByteCodeItem{
+			Value: b[:4],
+			Size:  4,
+		}
+		b = b[4:]
+		Ipv4Mask := types.UdpResponseByteCodeItem{
+			Value: b[:4],
+			Size:  4,
+		}
+		b = b[4:]
+		SValue := tools.BytesToUintBE(b[:1])
+		Size := types.UdpResponseByteCodeItem{
+			Value: SValue,
+			Size:  1,
+		}
+		b = b[1:]
+		AdapterName := types.UdpResponseByteCodeItem{
+			Value: b[:SValue*2],
+			Size:  int(SValue * 2),
+		}
+		b = b[SValue*2:]
+		m = append(m, types.AdapterInfoItem{
+			ChannelNo:   ChannelNo,
+			AdapterType: AdapterType,
+			Ipv4Addr:    Ipv4Addr,
+			Ipv4Mask:    Ipv4Mask,
+			Size:        Size,
+			AdapterName: AdapterName,
+		})
+	}
+	return m, b
+}
