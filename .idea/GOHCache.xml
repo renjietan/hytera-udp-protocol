@@ -1164,7 +1164,7 @@
         <entry key="file://$PROJECT_DIR$/core/ressponse/auth/types.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1779723588842" />
+              <option name="lastModified" value="1779804490138" />
               <option name="schema">
                 <list>
                   <option value="LoginAck" />
@@ -1177,7 +1177,6 @@
                   <option value="KickOutInfoAck" />
                   <option value="LoginInfoAck" />
                   <option value="AdapterInfoAck" />
-                  <option value="AdapterInfoItem" />
                 </list>
               </option>
             </ScannedPath>
@@ -1193,7 +1192,7 @@
         <entry key="file://$PROJECT_DIR$/core/ressponse/reponse.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1779725000146" />
+              <option name="lastModified" value="1779804403930" />
             </ScannedPath>
           </value>
         </entry>
@@ -1309,7 +1308,7 @@
         <entry key="file://$PROJECT_DIR$/main.go">
           <value>
             <ScannedPath>
-              <option name="lastModified" value="1779721842665" />
+              <option name="lastModified" value="1779804170001" />
             </ScannedPath>
           </value>
         </entry>

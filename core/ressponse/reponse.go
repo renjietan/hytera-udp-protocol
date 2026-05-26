@@ -55,7 +55,6 @@ func ByteCode2Stuct(b []byte, v interface{}, path string, bindPaths map[string]t
 		field := val.Field(i)
 		fieldType := typ.Field(i)
 		currentPath := path + fieldType.Name
-
 		value := bindPaths[currentPath]
 		Path := value.Path
 		ValueType := value.ValueType
@@ -107,7 +106,6 @@ func ByteCode2Stuct(b []byte, v interface{}, path string, bindPaths map[string]t
 					} else if originalBind.ValueType == types.UdpResponseBindStructRange {
 						ext := GetPathExt(originalBind.Path, ".")
 						itemLen := int(tools.BytesToUintBE(forwardByte.Data))
-
 						//vv := tools.BytesToUintBE(valueField)
 						if ext == "Channels" {
 							originalValue, bt := NewAdapterInfoItems(itemLen, b)
@@ -135,6 +133,9 @@ func ByteCode2Stuct(b []byte, v interface{}, path string, bindPaths map[string]t
 			} else if elem.Kind() == reflect.Ptr {
 				ByteCode2Stuct(b, elem.Interface(), currentPath+".", bindPaths)
 			}
+			continue
+		} else if fieldType.Type.Kind() == reflect.Slice {
+			// 单纯的 slice 值 非结构体
 			continue
 		}
 		if field.Kind() == reflect.Struct {

@@ -289,6 +289,10 @@ type AdapterInfoAck struct {
 	Channels []types.AdapterInfoItem
 	TestSize types.UdpResponseByteCodeItem
 	TestName types.UdpResponseByteCodeItem
+	// 设备适配器链表元素数量
+	ListCount2 types.UdpResponseByteCodeItem // 2 Bytes
+	// 适配器列表
+	Channels2 []types.AdapterInfoItem
 }
 
 func NewAdapterInfoAck() types.Payload {
@@ -310,20 +314,6 @@ func NewAdapterInfoAck() types.Payload {
 		},
 		// 根据 ListCount 计算
 		Channels: []types.AdapterInfoItem{},
-		TestSize: types.UdpResponseByteCodeItem{
-			Value: []byte{},
-			Size:  1,
-			Bind: types.UdpResponseBindStruct{
-				Path:      "Payload.OptData.TestSize",
-				FieldName: types.UdpResponseBindStructSize,
-				Value:     nil,
-				ValueType: types.UdpResponseBindStructInt,
-			},
-		},
-		TestName: types.UdpResponseByteCodeItem{
-			Value: []byte{},
-			Size:  0,
-		},
 	}
 	return response.TempPayload(res)
 }
